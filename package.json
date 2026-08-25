@@ -1,0 +1,29 @@
+{
+  "name": "brandview",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "bun run server/index.ts"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "colorjs.io": "^0.5.2",
+    "fast-json-patch": "^3.1.1",
+    "hono": "^4.7.2",
+    "jspdf": "^2.5.2",
+    "sharp": "^0.33.5",
+    "solid-js": "^1.9.5",
+    "style-dictionary": "^4.3.4",
+    "svg2pdf.js": "^2.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.9",
+    "tailwindcss": "^4.0.9",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0",
+    "vite-plugin-solid": "^2.11.6"
+  }
+}

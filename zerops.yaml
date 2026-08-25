@@ -1,0 +1,27 @@
+zerops:
+  - setup: brandview
+    build:
+      base: bun@1.3.9
+      prepareCommands:
+        - sudo apk update && sudo apk add --no-cache inkscape ghostscript vips-dev font-dejavu unzip p7zip
+      buildCommands:
+        - bun install
+        - bun run build
+      deployFiles:
+        - .
+      cache:
+        - ~/.bun
+    run:
+      base: bun@1.3.9
+      ports:
+        - port: 3000
+          httpSupport: true
+      mount:
+        - baiostorage
+      envVariables:
+        PORT: 3000
+        HOST: 0.0.0.0
+        NODE_ENV: production
+        BRANDS_SSOT_ROOT: /mnt/baiostorage/baiosfera/ASTROLOGÍA/DIAG
+        ENVATO_FONTS_ROOT: /mnt/baiostorage/baiosfera/FUENTES/ENVATO
+      start: bun run server/index.ts

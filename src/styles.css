@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand-primary: #10b981;
+  --color-brand-accent: #f59e0b;
+}
+
+/* Ocultar barras de scroll pero permitir navegación */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Modos Fullscreen */
+.fullscreen-active {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999990 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Clases de Ligaduras OpenType */
+.ligatures-active {
+  font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
+  font-feature-settings: "liga" 1, "dlig" 1, "calt" 1;
+}

@@ -1,0 +1,20 @@
+name: Deploy Brandview to Zerops
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Zerops
+        uses: zeropsio/actions@v1.0.2
+        with:
+          access-token: ${{ secrets.ZEROPS_TOKEN }}
+          service-id: ${{ secrets.ZEROPS_SERVICE_ID || '8Sfc3AMJTjuFiWkWAeg8Jg' }}
+

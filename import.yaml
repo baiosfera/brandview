@@ -1,0 +1,16 @@
+#zeropsPreprocessor=on
+project:
+  name: brandview-app
+  corePackage: LIGHT
+
+services:
+  - hostname: brandview
+    type: nodejs@22
+    priority: 5
+    enableSubdomainAccess: true
+    minContainers: 1
+    maxContainers: 2
+    verticalAutoscaling:
+      cpuMode: SHARED
+      minFreeRamGB: 0.25
+      minFreeRamPercent: 10

@@ -11,27 +11,33 @@ import sharp from 'sharp';
 function resolveBrandsRoot(): string {
   const candidates = [
     process.env.BRANDS_SSOT_ROOT,
+    '/var/www/baiosfera/ASTROLOGÍA/DIAG',
+    '/var/www/data/astrologia/DIAG',
+    '/mnt/localstorage/brands',
+    '/mnt/localstorage/DIAG',
     '/mnt/baiostorage/DIAG',
-    '/mnt/baiostorage/baiosfera/ASTROLOGÍA/DIAG',
-    '/var/www/baiosfera/ASTROLOGÍA/DIAG'
+    '/mnt/baiostorage/baiosfera/ASTROLOGÍA/DIAG'
   ];
   for (const c of candidates) {
     if (c && existsSync(c)) return c;
   }
-  return '/mnt/baiostorage/DIAG';
+  return process.env.BRANDS_SSOT_ROOT || '/var/www/baiosfera/ASTROLOGÍA/DIAG';
 }
 
 function resolveFontsRoot(): string {
   const candidates = [
     process.env.ENVATO_FONTS_ROOT,
+    '/var/www/baiosfera/FUENTES/ENVATO',
+    '/var/www/data/FUENTES/ENVATO',
+    '/mnt/localstorage/fonts',
+    '/mnt/localstorage/FUENTES/ENVATO',
     '/mnt/baiostorage/FUENTES/ENVATO',
-    '/mnt/baiostorage/baiosfera/FUENTES/ENVATO',
-    '/var/www/baiosfera/FUENTES/ENVATO'
+    '/mnt/baiostorage/baiosfera/FUENTES/ENVATO'
   ];
   for (const c of candidates) {
     if (c && existsSync(c)) return c;
   }
-  return '/mnt/baiostorage/FUENTES/ENVATO';
+  return process.env.ENVATO_FONTS_ROOT || '/var/www/baiosfera/FUENTES/ENVATO';
 }
 
 const BRANDS_ROOT = resolveBrandsRoot();

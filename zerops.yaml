@@ -16,8 +16,7 @@ zerops:
       ports:
         - port: 3000
           httpSupport: true
-      mount:
-        - baiostorage
+      # Storage is mounted automatically via localstorage or SSoT
       envVariables:
         PORT: 3000
         HOST: 0.0.0.0

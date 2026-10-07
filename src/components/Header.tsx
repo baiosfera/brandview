@@ -62,7 +62,7 @@ export const Header: Component = () => {
               setActiveBrandId(brandId);
               loadActiveBrand(brandId, ver || 'latest');
             }}
-            class="bg-gray-950 border border-gray-700 text-white font-bold text-xs rounded px-3 py-1.5 focus:outline-none focus:border-emerald-500 transition cursor-pointer shadow-sm min-w-[220px]"
+            class="bg-gray-950 border border-gray-700 text-white font-bold text-xs rounded px-3 py-1.5 focus:outline-none focus:border-emerald-500 transition cursor-pointer shadow-sm w-[220px] max-w-[220px] truncate text-ellipsis"
           >
             <For each={brands()}>
               {(b: any) => {

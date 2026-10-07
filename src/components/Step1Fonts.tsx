@@ -36,19 +36,7 @@ export const Step1Fonts: Component = () => {
   const [isExtracting, setIsExtracting] = createSignal(false);
   const [extractMsg, setExtractMsg] = createSignal('');
 
-  const ecosystems = (): FontEcosystem[] => brandData.font_manifest?.candidate_ecosystems || [
-    {
-      id: 'eco-1',
-      name: `${brandDisplayName()} — Ecosistema Principal`,
-      archetype: 'Estructura & Distinción Visual',
-      rationale: 'Elegancia contemporánea de alto contraste.',
-      tokens: {
-        display_primary: { $value: 'Rising', source: 'envato' },
-        ui_secondary: { $value: 'Plus Jakarta Sans', source: 'google_fonts' },
-        accent_brand: { $value: 'Calestra', source: 'envato' }
-      }
-    }
-  ];
+  const ecosystems = (): FontEcosystem[] => brandData.font_manifest?.candidate_ecosystems || [];
 
   // Añadir un nuevo lienzo al workbench cargando un ecosistema con sus 6 capas funcionales (Punto 2.b)
   const addCanvasFromEcosystem = async (eco: FontEcosystem) => {
@@ -274,21 +262,34 @@ export const Step1Fonts: Component = () => {
   const getNodeStyle = (cardId: string, itemId: string, defaultFont: string, defaultSize: number, defaultAlign: 'left' | 'center' | 'right' | 'justify' = 'center'): ElementStyle => {
     const key = `${cardId}_${itemId}`;
     if (!elementsStore[key]) {
+      let baseStyle: Partial<ElementStyle> = {};
+      if (itemId.includes('_w') || itemId.includes('_l')) {
+        const parentId = itemId.split('_')[0];
+        const parentKey = `${cardId}_${parentId}`;
+        if (elementsStore[parentKey]) {
+          baseStyle = { ...elementsStore[parentKey] };
+          // Do not inherit positioning, otherwise words overlap exactly at parent's offset
+          baseStyle.translateX = 0;
+          baseStyle.translateY = 0;
+          baseStyle.rotation = 0;
+        }
+      }
+
       setElementsStore(key, {
         text: '',
-        fontSize: defaultSize,
-        letterSpacing: itemId === 'slogan' ? 0.15 : (itemId === 'initials' ? 0.02 : 0.04),
-        lineHeight: itemId === 'initials' ? 1.0 : (itemId === 'body' ? 1.6 : 1.2),
-        fontFamily: defaultFont,
-        textTransform: itemId === 'slogan' || itemId === 'initials' ? 'uppercase' : 'none',
-        fontWeight: 'normal',
-        fontStyle: itemId === 'h2' ? 'italic' : 'normal',
-        textAlign: defaultAlign,
-        ligatures: true,
+        fontSize: baseStyle.fontSize ?? defaultSize,
+        letterSpacing: baseStyle.letterSpacing ?? (itemId === 'slogan' ? 0.15 : (itemId === 'initials' ? 0.02 : 0.04)),
+        lineHeight: baseStyle.lineHeight ?? (itemId === 'initials' ? 1.0 : (itemId === 'body' ? 1.6 : 1.2)),
+        fontFamily: baseStyle.fontFamily ?? defaultFont,
+        textTransform: baseStyle.textTransform ?? (itemId === 'slogan' || itemId === 'initials' ? 'uppercase' : 'none'),
+        fontWeight: baseStyle.fontWeight ?? 'normal',
+        fontStyle: baseStyle.fontStyle ?? (itemId === 'h2' ? 'italic' : 'normal'),
+        textAlign: baseStyle.textAlign ?? defaultAlign,
+        ligatures: baseStyle.ligatures ?? true,
         translateX: 0,
         translateY: 0,
         rotation: 0,
-        mirror: false
+        mirror: baseStyle.mirror ?? false
       });
     }
     return elementsStore[key];

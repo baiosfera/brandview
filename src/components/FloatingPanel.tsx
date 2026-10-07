@@ -10,6 +10,7 @@ import {
   selectedEcosystem
 } from '../state';
 import { loadFontDynamically } from '../utils/fontLoader';
+import { FluidSlider } from './FluidSlider';
 
 export const FloatingPanel: Component = () => {
   let isDragging = false;
@@ -207,13 +208,7 @@ export const FloatingPanel: Component = () => {
                   class="text-[10px] text-gray-500 hover:text-white" title="Reset Tamaño"
                 >↺</button>
               </div>
-              <input 
-                type="range" min="10" max="280" value={style().fontSize}
-                
-                
-                onInput={(e) => handleRangeInput('fontSize', parseFloat(e.currentTarget.value))}
-                class="w-full accent-emerald-500 cursor-pointer h-1.5"
-              />
+              <FluidSlider min="10" max="280" value={style().fontSize} onChange={(v) => handleRangeInput('fontSize', v)} />
             </div>
 
             {/* Letter Spacing con Reset */}
@@ -225,13 +220,7 @@ export const FloatingPanel: Component = () => {
                   class="text-[10px] text-gray-500 hover:text-white" title="Reset Espaciado"
                 >↺</button>
               </div>
-              <input 
-                type="range" min="-0.2" max="1" step="0.01" value={style().letterSpacing}
-                
-                
-                onInput={(e) => handleRangeInput('letterSpacing', parseFloat(e.currentTarget.value))}
-                class="w-full accent-emerald-500 cursor-pointer h-1.5"
-              />
+              <FluidSlider min="-0.2" max="1" step="0.01" value={style().letterSpacing} onChange={(v) => handleRangeInput('letterSpacing', v)} />
             </div>
           </div>
 
@@ -308,13 +297,7 @@ export const FloatingPanel: Component = () => {
                 <span>X: <strong class="text-emerald-400 font-mono">{style().translateX}px</strong></span>
                 <button onClick={() => updateActiveElementStyle('translateX', 0)} class="text-gray-500 hover:text-white">↺</button>
               </div>
-              <input 
-                type="range" min="-300" max="300" value={style().translateX}
-                
-                
-                onInput={(e) => handleRangeInput('translateX', parseFloat(e.currentTarget.value))}
-                class="w-full accent-emerald-500 cursor-pointer h-1.5"
-              />
+              <FluidSlider min="-300" max="300" value={style().translateX} onChange={(v) => handleRangeInput('translateX', v)} />
             </div>
 
             {/* Translate Y */}
@@ -323,13 +306,7 @@ export const FloatingPanel: Component = () => {
                 <span>Y: <strong class="text-emerald-400 font-mono">{style().translateY}px</strong></span>
                 <button onClick={() => updateActiveElementStyle('translateY', 0)} class="text-gray-500 hover:text-white">↺</button>
               </div>
-              <input 
-                type="range" min="-300" max="300" value={style().translateY}
-                
-                
-                onInput={(e) => handleRangeInput('translateY', parseFloat(e.currentTarget.value))}
-                class="w-full accent-emerald-500 cursor-pointer h-1.5"
-              />
+              <FluidSlider min="-300" max="300" value={style().translateY} onChange={(v) => handleRangeInput('translateY', v)} />
             </div>
 
             {/* Rotación y Espejo */}
@@ -339,13 +316,7 @@ export const FloatingPanel: Component = () => {
                   <span>Rot: <strong class="text-emerald-400 font-mono">{style().rotation}°</strong></span>
                   <button onClick={() => updateActiveElementStyle('rotation', 0)} class="text-gray-500 hover:text-white">↺</button>
                 </div>
-                <input 
-                  type="range" min="-180" max="180" value={style().rotation}
-                  
-                  
-                  onInput={(e) => handleRangeInput('rotation', parseFloat(e.currentTarget.value))}
-                  class="w-full accent-emerald-500 cursor-pointer h-1.5"
-                />
+                <FluidSlider min="-180" max="180" value={style().rotation} onChange={(v) => handleRangeInput('rotation', v)} />
               </div>
 
               <button 

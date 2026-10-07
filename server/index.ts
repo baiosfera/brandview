@@ -11,33 +11,33 @@ import sharp from 'sharp';
 function resolveBrandsRoot(): string {
   const candidates = [
     process.env.BRANDS_SSOT_ROOT,
-    '/var/www/baiosfera/ASTROLOGÍA/DIAG',
+    '/mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG',
     '/var/www/data/astrologia/DIAG',
     '/mnt/localstorage/brands',
     '/mnt/localstorage/DIAG',
-    '/mnt/baiostorage/DIAG',
-    '/mnt/baiostorage/baiosfera/ASTROLOGÍA/DIAG'
+    '/mnt/localstorage/baiosfera/DIAG',
+    '/mnt/localstorage/baiosfera/baiosfera/ASTROLOGÍA/DIAG'
   ];
   for (const c of candidates) {
     if (c && existsSync(c)) return c;
   }
-  return process.env.BRANDS_SSOT_ROOT || '/var/www/baiosfera/ASTROLOGÍA/DIAG';
+  return process.env.BRANDS_SSOT_ROOT || '/mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG';
 }
 
 function resolveFontsRoot(): string {
   const candidates = [
     process.env.ENVATO_FONTS_ROOT,
-    '/var/www/baiosfera/FUENTES/ENVATO',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO',
     '/var/www/data/FUENTES/ENVATO',
     '/mnt/localstorage/fonts',
     '/mnt/localstorage/FUENTES/ENVATO',
-    '/mnt/baiostorage/FUENTES/ENVATO',
-    '/mnt/baiostorage/baiosfera/FUENTES/ENVATO'
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO',
+    '/mnt/localstorage/baiosfera/baiosfera/FUENTES/ENVATO'
   ];
   for (const c of candidates) {
     if (c && existsSync(c)) return c;
   }
-  return process.env.ENVATO_FONTS_ROOT || '/var/www/baiosfera/FUENTES/ENVATO';
+  return process.env.ENVATO_FONTS_ROOT || '/mnt/localstorage/baiosfera/FUENTES/ENVATO';
 }
 
 const BRANDS_ROOT = resolveBrandsRoot();
@@ -71,8 +71,8 @@ function saveJsonAtomic(filePath: string, data: any) {
 // Extractor automático de archivos ZIP de fuentes Envato
 async function extractAllZipFonts(): Promise<string[]> {
   const extractedDirs = [
-    '/var/www/baiosfera/FUENTES/ENVATO/_extracted',
-    '/mnt/baiostorage/FUENTES/ENVATO/_extracted'
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO/_extracted',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO/_extracted'
   ];
 
   for (const ed of extractedDirs) {
@@ -82,8 +82,8 @@ async function extractAllZipFonts(): Promise<string[]> {
   }
 
   const sourceRoots = [
-    '/var/www/baiosfera/FUENTES/ENVATO',
-    '/mnt/baiostorage/FUENTES/ENVATO',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO',
     resolveFontsRoot()
   ].filter(r => existsSync(r));
 
@@ -96,8 +96,8 @@ async function extractAllZipFonts(): Promise<string[]> {
         if (file.toLowerCase().endsWith('.zip')) {
           allZips.add(join(sRoot, file));
           // Copiar a baiostorage si no existe allí
-          const storageZip = join('/mnt/baiostorage/FUENTES/ENVATO', file);
-          if (!existsSync(storageZip) && existsSync('/mnt/baiostorage/FUENTES/ENVATO')) {
+          const storageZip = join('/mnt/localstorage/baiosfera/FUENTES/ENVATO', file);
+          if (!existsSync(storageZip) && existsSync('/mnt/localstorage/baiosfera/FUENTES/ENVATO')) {
             try { copyFileSync(join(sRoot, file), storageZip); } catch {}
           }
         }
@@ -126,10 +126,10 @@ const fontPathsCache = new Map<string, string>();
 
 function scanExtractedFonts(): string[] {
   const scanDirs = [
-    '/var/www/baiosfera/FUENTES/ENVATO/_extracted',
-    '/mnt/baiostorage/FUENTES/ENVATO/_extracted',
-    '/var/www/baiosfera/FUENTES/ENVATO',
-    '/mnt/baiostorage/FUENTES/ENVATO',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO/_extracted',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO/_extracted',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO',
+    '/mnt/localstorage/baiosfera/FUENTES/ENVATO',
     join(resolveFontsRoot(), '_extracted')
   ];
 
@@ -148,7 +148,9 @@ function scanExtractedFonts(): string[] {
           fontPathsCache.set(normFile, full);
         }
       }
-    } catch {}
+    } catch (err) {
+      console.warn('[Scanner]', err);
+    }
   }
 
   scanDirs.forEach(d => scanDir(d));
@@ -287,7 +289,7 @@ app.get('/api/brands', (c) => {
       const fontgenVersions: string[] = [];
       for (const file of files) {
         const bfile = basename(file);
-        if (bfile.startsWith('fontgen_') && bfile.endsWith('.md')) {
+        if ((bfile.toLowerCase().includes('fontgen') || bfile.toLowerCase().includes('fongen') || bfile.toLowerCase().includes('brandbook')) && bfile.endsWith('.md')) {
           fontgenVersions.push(bfile);
         }
       }
@@ -380,7 +382,10 @@ app.get('/api/brand/:name', (c) => {
   // Buscar todos los reportes fontgen_*.md
   const allFiles = readdirSync(brandDir, { recursive: true }) as string[];
   const fontgenFiles = allFiles
-    .filter(f => basename(f).startsWith('fontgen_') && basename(f).endsWith('.md'))
+    .filter(f => {
+      const b = basename(f).toLowerCase();
+      return (b.includes('fontgen') || b.includes('fongen') || b.includes('brandbook')) && b.endsWith('.md');
+    })
     .sort((a, b) => {
       // Extraer números de versión si existen para ordenamiento numérico descendente estricto
       const numA = parseInt((basename(a).match(/_v(\d+)\.md$/i) || [0, 0])[1] as any, 10) || 0;
@@ -478,7 +483,7 @@ app.post('/api/brand/:name/compile-brandbook', async (c) => {
   writeFileSync(brandbookJsonPath, JSON.stringify(brandbookData, null, 2), 'utf-8');
 
   // Sincronizar en storage si aplica
-  const storageDir = join('/mnt/baiostorage/DIAG', brandName);
+  const storageDir = join('/mnt/localstorage/baiosfera/DIAG', brandName);
   if (existsSync(storageDir)) {
     try {
       writeFileSync(join(storageDir, 'brandbook.json'), JSON.stringify(brandbookData, null, 2), 'utf-8');

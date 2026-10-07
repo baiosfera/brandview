@@ -19,9 +19,7 @@ export const FloatingPanel: Component = () => {
   let initY = 0;
 
   const handleRangeInput = (prop: keyof ElementStyle, value: number) => {
-    requestAnimationFrame(() => {
-      updateActiveElementStyle(prop, value);
-    });
+    updateActiveElementStyle(prop, value);
   };
 
   const handlePointerMoveWindow = (e: PointerEvent) => {
@@ -79,7 +77,7 @@ export const FloatingPanel: Component = () => {
     <Show when={floatingPanel.visible && activeSelection() !== null}>
       <div 
         onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
+        
         style={{ left: `${floatingPanel.x}px`, top: `${floatingPanel.y}px` }}
         class="fixed z-[999995] bg-gray-900/98 backdrop-blur-lg border border-emerald-500/80 rounded-xl shadow-2xl w-[720px] max-w-[95vw] flex flex-col text-xs text-gray-200 overflow-hidden select-none"
       >
@@ -211,8 +209,8 @@ export const FloatingPanel: Component = () => {
               </div>
               <input 
                 type="range" min="10" max="280" value={style().fontSize}
-                onMouseDown={(e) => e.stopPropagation()}
-                onTouchStart={(e) => e.stopPropagation()}
+                
+                
                 onInput={(e) => handleRangeInput('fontSize', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
@@ -229,8 +227,8 @@ export const FloatingPanel: Component = () => {
               </div>
               <input 
                 type="range" min="-0.2" max="1" step="0.01" value={style().letterSpacing}
-                onMouseDown={(e) => e.stopPropagation()}
-                onTouchStart={(e) => e.stopPropagation()}
+                
+                
                 onInput={(e) => handleRangeInput('letterSpacing', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
@@ -312,8 +310,8 @@ export const FloatingPanel: Component = () => {
               </div>
               <input 
                 type="range" min="-300" max="300" value={style().translateX}
-                onMouseDown={(e) => e.stopPropagation()}
-                onTouchStart={(e) => e.stopPropagation()}
+                
+                
                 onInput={(e) => handleRangeInput('translateX', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
@@ -327,8 +325,8 @@ export const FloatingPanel: Component = () => {
               </div>
               <input 
                 type="range" min="-300" max="300" value={style().translateY}
-                onMouseDown={(e) => e.stopPropagation()}
-                onTouchStart={(e) => e.stopPropagation()}
+                
+                
                 onInput={(e) => handleRangeInput('translateY', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
@@ -343,8 +341,8 @@ export const FloatingPanel: Component = () => {
                 </div>
                 <input 
                   type="range" min="-180" max="180" value={style().rotation}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onTouchStart={(e) => e.stopPropagation()}
+                  
+                  
                   onInput={(e) => handleRangeInput('rotation', parseFloat(e.currentTarget.value))}
                   class="w-full accent-emerald-500 cursor-pointer h-1.5"
                 />

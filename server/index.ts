@@ -273,14 +273,15 @@ app.get('/api/brands', (c) => {
     .filter(e => e.isDirectory() && !e.name.startsWith('.') && e.name !== 'coach_report' && e.name !== 'raw')
     .map(e => {
       const brandDir = join(root, e.name);
-      const files = readdirSync(brandDir);
+      const files = readdirSync(brandDir, { recursive: true }) as string[];
       
       const fontgenVersions: string[] = [];
       for (const file of files) {
-        const match = file.match(/^fontgen_(?:.*?)_(v\d+)\.md$/i);
+        const bfile = basename(file);
+        const match = bfile.match(/^fontgen_(?:.*?)_(v\d+)\.md$/i);
         if (match) {
           fontgenVersions.push(match[1]);
-        } else if (file.startsWith('fontgen_') && file.endsWith('.md')) {
+        } else if (bfile.startsWith('fontgen_') && bfile.endsWith('.md')) {
           fontgenVersions.push('v1');
         }
       }
@@ -375,15 +376,15 @@ app.get('/api/brand/:name', (c) => {
   }
 
   // Buscar todos los reportes fontgen_*.md
-  const allFiles = readdirSync(brandDir);
+  const allFiles = readdirSync(brandDir, { recursive: true }) as string[];
   const fontgenFiles = allFiles
-    .filter(f => f.startsWith('fontgen_') && f.endsWith('.md'))
+    .filter(f => basename(f).startsWith('fontgen_') && basename(f).endsWith('.md'))
     .sort((a, b) => {
       // Extraer números de versión si existen para ordenamiento numérico descendente estricto
-      const numA = parseInt((a.match(/_v(\d+)\.md$/i) || [0, 0])[1] as any, 10) || 0;
-      const numB = parseInt((b.match(/_v(\d+)\.md$/i) || [0, 0])[1] as any, 10) || 0;
+      const numA = parseInt((basename(a).match(/_v(\d+)\.md$/i) || [0, 0])[1] as any, 10) || 0;
+      const numB = parseInt((basename(b).match(/_v(\d+)\.md$/i) || [0, 0])[1] as any, 10) || 0;
       if (numA !== numB) return numB - numA;
-      return b.localeCompare(a, undefined, { numeric: true });
+      return basename(b).localeCompare(basename(a), undefined, { numeric: true });
     });
 
   if (fontgenFiles.length > 0) {

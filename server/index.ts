@@ -122,6 +122,8 @@ async function extractAllZipFonts(): Promise<string[]> {
   return scanExtractedFonts();
 }
 
+const fontPathsCache = new Map<string, string>();
+
 function scanExtractedFonts(): string[] {
   const scanDirs = [
     '/var/www/baiosfera/FUENTES/ENVATO/_extracted',
@@ -131,26 +133,33 @@ function scanExtractedFonts(): string[] {
     join(resolveFontsRoot(), '_extracted')
   ];
 
-  function scanDir(dir: string): string[] {
-    let results: string[] = [];
-    if (!existsSync(dir)) return results;
+  fontPathsCache.clear();
+
+  function scanDir(dir: string) {
+    if (!existsSync(dir)) return;
     try {
       const list = readdirSync(dir, { withFileTypes: true });
       for (const item of list) {
         const full = join(dir, item.name);
         if (item.isDirectory() && !item.name.startsWith('__MACOSX')) {
-          results = results.concat(scanDir(full));
+          scanDir(full);
         } else if (/\.(otf|ttf|woff|woff2)$/i.test(item.name)) {
-          results.push(item.name);
+          const normFile = item.name.toLowerCase().replace(/[\s\-_]/g, '').replace(/\.(otf|ttf|woff|woff2)$/i, '');
+          fontPathsCache.set(normFile, full);
         }
       }
     } catch {}
-    return results;
   }
 
-  const all = scanDirs.flatMap(d => scanDir(d));
+  scanDirs.forEach(d => scanDir(d));
+  // Return the original filenames or clean names? The frontend expects the actual filenames (with extensions) currently to display.
+  // Actually, we can return just the keys or base names. Let's return the basenames from the paths.
+  const all = Array.from(fontPathsCache.values()).map(p => basename(p));
   return Array.from(new Set(all)).sort((a, b) => a.localeCompare(b));
 }
+
+// Initial scan
+scanExtractedFonts();
 
 // Parser inteligente de reportes Markdown de fontgen con extracción estricta de nombres y URLs
 function parseFontToken(line: string): { name: string; url?: string; source: string } {
@@ -278,19 +287,12 @@ app.get('/api/brands', (c) => {
       const fontgenVersions: string[] = [];
       for (const file of files) {
         const bfile = basename(file);
-        const match = bfile.match(/^fontgen_(?:.*?)_(v\d+)\.md$/i);
-        if (match) {
-          fontgenVersions.push(match[1]);
-        } else if (bfile.startsWith('fontgen_') && bfile.endsWith('.md')) {
-          fontgenVersions.push('v1');
+        if (bfile.startsWith('fontgen_') && bfile.endsWith('.md')) {
+          fontgenVersions.push(bfile);
         }
       }
 
-      const sortedVersions = Array.from(new Set(fontgenVersions)).sort((a, b) => {
-        const numA = parseInt(a.replace(/\D/g, '')) || 0;
-        const numB = parseInt(b.replace(/\D/g, '')) || 0;
-        return numB - numA;
-      });
+      const sortedVersions = Array.from(new Set(fontgenVersions)).sort((a, b) => b.localeCompare(a));
 
       return {
         id: e.name,
@@ -389,11 +391,10 @@ app.get('/api/brand/:name', (c) => {
 
   if (fontgenFiles.length > 0) {
     data.fontgen_versions = fontgenFiles.map((f, idx) => {
-      const vMatch = f.match(/_v(\d+)\.md$/i);
-      const ver = vMatch ? `v${vMatch[1]}` : (fontgenFiles.length === 1 ? 'v1' : `v${idx + 1}`);
+      const bfile = basename(f);
       return {
         filename: f,
-        version: ver,
+        version: bfile,
         isLatest: idx === 0
       };
     });
@@ -409,8 +410,7 @@ app.get('/api/brand/:name', (c) => {
       if (found) targetFile = found;
     }
 
-    const vMatch = targetFile.match(/_v(\d+)\.md$/i);
-    data.active_version = vMatch ? `v${vMatch[1]}` : (fontgenFiles.length === 1 ? 'v1' : 'latest');
+    data.active_version = basename(targetFile);
 
     const mdContent = readFileSync(join(brandDir, targetFile), 'utf-8');
     data.fontgen_markdown = mdContent;
@@ -505,39 +505,11 @@ app.get('/api/fonts/envato/:fontName', (c) => {
   const rawTarget = decodeURIComponent(c.req.param('fontName'));
   const normTarget = rawTarget.toLowerCase().replace(/[\s\-_]/g, '').replace(/\.(otf|ttf|woff|woff2)$/i, '');
 
-  const searchRoots = [
-    join(resolveFontsRoot(), '_extracted'),
-    '/mnt/baiostorage/FUENTES/ENVATO/_extracted',
-    '/var/www/baiosfera/FUENTES/ENVATO/_extracted',
-    resolveFontsRoot(),
-    '/mnt/baiostorage/FUENTES/ENVATO',
-    '/var/www/baiosfera/FUENTES/ENVATO'
-  ];
+  let filePath = fontPathsCache.get(normTarget);
   
-  function findFile(dir: string): string | null {
-    if (!existsSync(dir)) return null;
-    try {
-      const list = readdirSync(dir, { withFileTypes: true });
-      for (const item of list) {
-        const full = join(dir, item.name);
-        if (item.isDirectory() && !item.name.startsWith('__MACOSX')) {
-          const found = findFile(full);
-          if (found) return found;
-        } else if (/\.(otf|ttf|woff|woff2)$/i.test(item.name)) {
-          const normFile = item.name.toLowerCase().replace(/[\s\-_]/g, '').replace(/\.(otf|ttf|woff|woff2)$/i, '');
-          if (normFile === normTarget || normFile.startsWith(normTarget) || normTarget.startsWith(normFile) || normFile.includes(normTarget)) {
-            return full;
-          }
-        }
-      }
-    } catch {}
-    return null;
-  }
-
-  let filePath: string | null = null;
-  for (const root of searchRoots) {
-    filePath = findFile(root);
-    if (filePath) break;
+  if (!filePath && fontPathsCache.size === 0) {
+    scanExtractedFonts();
+    filePath = fontPathsCache.get(normTarget);
   }
 
   if (!filePath || !existsSync(filePath)) {

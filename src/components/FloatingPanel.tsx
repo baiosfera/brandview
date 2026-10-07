@@ -18,6 +18,12 @@ export const FloatingPanel: Component = () => {
   let initX = 0;
   let initY = 0;
 
+  const handleRangeInput = (prop: keyof ElementStyle, value: number) => {
+    requestAnimationFrame(() => {
+      updateActiveElementStyle(prop, value);
+    });
+  };
+
   const handlePointerMoveWindow = (e: PointerEvent) => {
     if (!isDragging) return;
     const dx = e.clientX - startX;
@@ -80,9 +86,6 @@ export const FloatingPanel: Component = () => {
         {/* Header Arrastrable (Punto 5.a - Fluido con Pointer Events) */}
         <div 
           onPointerDown={handlePanelPointerDown}
-          onPointerMove={handlePanelPointerMove}
-          onPointerUp={handlePanelPointerUp}
-          onPointerCancel={handlePanelPointerUp}
           class="bg-gray-950 px-4 py-2.5 cursor-grab active:cursor-grabbing flex items-center justify-between border-b border-gray-800 select-none"
         >
           <div class="flex items-center gap-2">
@@ -210,7 +213,7 @@ export const FloatingPanel: Component = () => {
                 type="range" min="10" max="280" value={style().fontSize}
                 onMouseDown={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
-                onInput={(e) => updateActiveElementStyle('fontSize', parseFloat(e.currentTarget.value))}
+                onInput={(e) => handleRangeInput('fontSize', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
             </div>
@@ -228,7 +231,7 @@ export const FloatingPanel: Component = () => {
                 type="range" min="-0.2" max="1" step="0.01" value={style().letterSpacing}
                 onMouseDown={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
-                onInput={(e) => updateActiveElementStyle('letterSpacing', parseFloat(e.currentTarget.value))}
+                onInput={(e) => handleRangeInput('letterSpacing', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
             </div>
@@ -311,7 +314,7 @@ export const FloatingPanel: Component = () => {
                 type="range" min="-300" max="300" value={style().translateX}
                 onMouseDown={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
-                onInput={(e) => updateActiveElementStyle('translateX', parseFloat(e.currentTarget.value))}
+                onInput={(e) => handleRangeInput('translateX', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
             </div>
@@ -326,7 +329,7 @@ export const FloatingPanel: Component = () => {
                 type="range" min="-300" max="300" value={style().translateY}
                 onMouseDown={(e) => e.stopPropagation()}
                 onTouchStart={(e) => e.stopPropagation()}
-                onInput={(e) => updateActiveElementStyle('translateY', parseFloat(e.currentTarget.value))}
+                onInput={(e) => handleRangeInput('translateY', parseFloat(e.currentTarget.value))}
                 class="w-full accent-emerald-500 cursor-pointer h-1.5"
               />
             </div>
@@ -342,7 +345,7 @@ export const FloatingPanel: Component = () => {
                   type="range" min="-180" max="180" value={style().rotation}
                   onMouseDown={(e) => e.stopPropagation()}
                   onTouchStart={(e) => e.stopPropagation()}
-                  onInput={(e) => updateActiveElementStyle('rotation', parseFloat(e.currentTarget.value))}
+                  onInput={(e) => handleRangeInput('rotation', parseFloat(e.currentTarget.value))}
                   class="w-full accent-emerald-500 cursor-pointer h-1.5"
                 />
               </div>

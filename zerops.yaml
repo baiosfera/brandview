@@ -16,8 +16,9 @@ zerops:
       ports:
         - port: 3000
           httpSupport: true
-      volumes:
-        - localstorage:/mnt/localstorage
+      volume:
+        hostname: localstorage
+        mountPath: /mnt/localstorage
       envVariables:
         PORT: 3000
         HOST: 0.0.0.0

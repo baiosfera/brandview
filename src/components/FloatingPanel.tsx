@@ -1,4 +1,4 @@
-import { Component, Show, For } from 'solid-js';
+import { Component, Show, For, createSignal, createEffect } from 'solid-js';
 import { 
   floatingPanel, 
   setFloatingPanel,
@@ -53,6 +53,25 @@ export const FloatingPanel: Component = () => {
   };
 
   const style = () => getActiveElementStyle();
+
+  const [customGFont, setCustomGFont] = createSignal('');
+  const [fontFeatures, setFontFeatures] = createSignal<{ features: string[]; stylistic_sets: string[]; pua_count: number; pua_glyphs: any[] } | null>(null);
+  const [showGlyphPalette, setShowGlyphPalette] = createSignal(false);
+
+  createEffect(() => {
+    const fam = style().fontFamily;
+    if (fam) {
+      fetch(`/api/fonts/features/${encodeURIComponent(fam)}`)
+        .then(r => r.json())
+        .then(data => setFontFeatures(data))
+        .catch(() => setFontFeatures(null));
+    }
+  });
+
+  const insertGlyph = (char: string) => {
+    const current = style().text;
+    updateActiveElementStyle('text', current ? current + char : char);
+  };
 
   const fontgenFonts = () => {
     const list = new Set<string>();
@@ -245,6 +264,34 @@ export const FloatingPanel: Component = () => {
                 </optgroup>
               </select>
 
+              {/* Cargar cualquier Google Font por Nombre (1700+ fuentes) */}
+              <div class="flex items-center gap-1 mt-1">
+                <input 
+                  type="text" 
+                  placeholder="Cargar cualquier Google Font..." 
+                  value={customGFont()} 
+                  onInput={(e) => setCustomGFont(e.currentTarget.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && customGFont().trim()) {
+                      handleFontSelect(customGFont().trim());
+                      setCustomGFont('');
+                    }
+                  }}
+                  class="flex-1 bg-gray-950 border border-gray-700 rounded px-2 py-0.5 text-[10px] text-white focus:outline-none focus:border-emerald-500"
+                />
+                <button 
+                  onClick={() => {
+                    if (customGFont().trim()) {
+                      handleFontSelect(customGFont().trim());
+                      setCustomGFont('');
+                    }
+                  }}
+                  class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-2 py-0.5 rounded text-[10px] cursor-pointer"
+                >
+                  Cargar
+                </button>
+              </div>
+
               <label class="mt-1 bg-gray-800 hover:bg-gray-700 text-gray-300 text-[10px] py-1 px-2 rounded cursor-pointer text-center border border-gray-700 transition">
                 + Subir Fuente (.otf/.ttf)
                 <input type="file" accept=".otf,.ttf,.woff,.woff2" onChange={handleFileUpload} class="hidden" />
@@ -330,13 +377,96 @@ export const FloatingPanel: Component = () => {
               </div>
             </div>
 
-            {/* Ligaduras OpenType */}
-            <button 
-              onClick={() => updateActiveElementStyle('ligatures', !style().ligatures)}
-              class={`w-full py-1 rounded font-bold border text-xs transition cursor-pointer ${style().ligatures ? 'bg-purple-600 border-purple-500 text-white' : 'bg-gray-800 border-gray-700 text-gray-400'}`}
-            >
-              {style().ligatures ? '✓ Ligaduras Activadas' : 'Activar Ligaduras OpenType'}
-            </button>
+            {/* OpenType: Ligaduras, Swashes & Sets Estilísticos */}
+            <div class="flex flex-col gap-1.5 mt-1 bg-gray-950/70 p-2 rounded-lg border border-gray-800">
+              <span class="text-[10px] font-bold text-purple-300 uppercase tracking-wider flex items-center justify-between">
+                <span>Adornos & OpenType</span>
+                <Show when={fontFeatures()?.stylistic_sets?.length}>
+                  <span class="text-[9px] text-emerald-400 font-mono">({fontFeatures()?.stylistic_sets?.length} sets detectados)</span>
+                </Show>
+              </span>
+
+              <button 
+                onClick={() => updateActiveElementStyle('ligatures', !style().ligatures)}
+                class={`w-full py-1 rounded font-bold border text-xs transition cursor-pointer ${style().ligatures ? 'bg-purple-600 border-purple-500 text-white shadow-md' : 'bg-gray-800 border-gray-700 text-gray-400'}`}
+              >
+                {style().ligatures ? '✓ Ligaduras & Adornos Mayúsculas' : 'Activar Ligaduras & Adornos'}
+              </button>
+
+              <div>
+                <span class="text-[10px] text-gray-400 block mb-0.5">Set Estilístico / Swash:</span>
+                <select 
+                  value={style().stylisticSet || 'auto'}
+                  onChange={(e) => updateActiveElementStyle('stylisticSet', e.currentTarget.value as any)}
+                  class="w-full bg-gray-900 border border-gray-700 text-purple-200 font-bold rounded px-1.5 py-1 text-[11px] cursor-pointer focus:outline-none focus:border-purple-400"
+                >
+                  <option value="auto">✨ Auto (ss01-ss03 Adornos Mayúsculas)</option>
+                  <option value="all">👑 Todos los Sets Estilísticos</option>
+                  <option value="ss01">Set 1: Mayúsculas Adornadas (ss01)</option>
+                  <option value="ss02">Set 2: Swash Alternativo (ss02)</option>
+                  <option value="ss03">Set 3: Swash Extendido (ss03)</option>
+                  <option value="ss04">Set 4: Variación Especial (ss04)</option>
+                  <option value="ss05">Set 5: Variación Especial (ss05)</option>
+                  <option value="none">Sin Adornos (Texto Base)</option>
+                </select>
+              </div>
+
+              <div class="flex gap-1">
+                <button 
+                  onClick={() => updateActiveElementStyle('swashes', style().swashes === false ? true : false)}
+                  class={`flex-1 py-1 rounded font-bold border text-[10px] transition cursor-pointer ${style().swashes !== false ? 'bg-purple-900/80 border-purple-500 text-purple-200' : 'bg-gray-800 border-gray-700 text-gray-400'}`}
+                  title="Alterna swashes ornamentales"
+                >
+                  {style().swashes !== false ? '✓ Swash On' : 'Swash Off'}
+                </button>
+                <button 
+                  onClick={() => updateActiveElementStyle('alternates', style().alternates === false ? true : false)}
+                  class={`flex-1 py-1 rounded font-bold border text-[10px] transition cursor-pointer ${style().alternates !== false ? 'bg-purple-900/80 border-purple-500 text-purple-200' : 'bg-gray-800 border-gray-700 text-gray-400'}`}
+                  title="Alterna formas tipográficas estilísticas"
+                >
+                  {style().alternates !== false ? '✓ Alternates On' : 'Alternates Off'}
+                </button>
+              </div>
+
+              {/* Botón para abrir/cerrar Paleta de Glifos PUA */}
+              <Show when={fontFeatures() && fontFeatures()!.pua_count > 0}>
+                <button 
+                  onClick={() => setShowGlyphPalette(!showGlyphPalette())}
+                  class="w-full mt-1 py-1 bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-800 text-emerald-300 font-bold rounded text-[10px] transition cursor-pointer flex items-center justify-center gap-1"
+                >
+                  <span>{showGlyphPalette() ? '▲ Ocultar Glifos PUA' : `▼ Paleta de Adornos (${fontFeatures()!.pua_count} glifos)`}</span>
+                </button>
+              </Show>
+            </div>
+
+            {/* Cajón de Paleta de Glifos & Adornos PUA */}
+            <Show when={showGlyphPalette() && fontFeatures() && fontFeatures()!.pua_glyphs?.length}>
+              <div class="col-span-full bg-gray-950 border border-emerald-800/80 rounded-lg p-2 flex flex-col gap-1.5 max-h-36 overflow-y-auto mt-1">
+                <div class="text-[10px] text-gray-400 flex justify-between items-center">
+                  <span class="font-bold text-emerald-400">Haz clic en cualquier adorno para insertarlo:</span>
+                  <span class="text-gray-500 text-[9px]">{fontFeatures()!.pua_glyphs.length} glifos</span>
+                </div>
+                <div class="grid grid-cols-8 gap-1">
+                  <For each={fontFeatures()!.pua_glyphs}>
+                    {(g) => (
+                      <button
+                        onClick={() => insertGlyph(g.char)}
+                        class="p-1 bg-gray-900 hover:bg-emerald-900/60 border border-gray-700 hover:border-emerald-500 rounded text-center cursor-pointer transition flex flex-col items-center justify-center group"
+                        title={`${g.name} (${g.hex}) - Clic para insertar`}
+                      >
+                        <span 
+                          style={{ 'font-family': `"${style().fontFamily}", sans-serif` }}
+                          class="text-base text-white group-hover:text-emerald-300"
+                        >
+                          {g.char}
+                        </span>
+                        <span class="text-[8px] text-gray-500 font-mono truncate max-w-full">{g.hex}</span>
+                      </button>
+                    )}
+                  </For>
+                </div>
+              </div>
+            </Show>
           </div>
 
           {/* Columna 3: Posición & Transformación */}

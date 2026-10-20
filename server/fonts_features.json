@@ -1,16 +1,127 @@
 {
-  "averne": {
-    "name": "Averne",
-    "file": "Averne.ttf",
-    "features": [],
+  "luminara": {
+    "name": "Luminara",
+    "file": "Luminara.woff",
+    "features": [
+      "aalt",
+      "frac",
+      "liga",
+      "ordn",
+      "salt",
+      "sups"
+    ],
     "stylistic_sets": [],
     "substitutions": {},
     "pua_count": 0,
     "pua_glyphs": []
   },
+  "kaeleyaregular": {
+    "name": "Kaeleya-Regular",
+    "file": "Kaeleya-Regular.woff",
+    "features": [
+      "aalt",
+      "liga",
+      "salt"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 18,
+    "pua_glyphs": [
+      {
+        "hex": "U+E000",
+        "char": "",
+        "name": "uniE000"
+      },
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E00A",
+        "char": "",
+        "name": "uniE00A"
+      },
+      {
+        "hex": "U+E00B",
+        "char": "",
+        "name": "uniE00B"
+      },
+      {
+        "hex": "U+E4A0",
+        "char": "",
+        "name": "uniE4A0"
+      },
+      {
+        "hex": "U+E4A1",
+        "char": "",
+        "name": "uniE4A1"
+      },
+      {
+        "hex": "U+E4A3",
+        "char": "",
+        "name": "uniE4A3"
+      },
+      {
+        "hex": "U+E4AA",
+        "char": "",
+        "name": "uniE4AA"
+      },
+      {
+        "hex": "U+E4E0",
+        "char": "",
+        "name": "uniE4E0"
+      },
+      {
+        "hex": "U+E4E4",
+        "char": "",
+        "name": "uniE4E4"
+      }
+    ]
+  },
   "biancha": {
     "name": "Biancha",
-    "file": "Biancha.ttf",
+    "file": "Biancha.woff",
     "features": [
       "aalt",
       "liga",
@@ -674,9 +785,188 @@
       }
     ]
   },
+  "kaeleyaitalic": {
+    "name": "Kaeleya-Italic",
+    "file": "Kaeleya-Italic.woff",
+    "features": [
+      "aalt",
+      "liga",
+      "salt"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 18,
+    "pua_glyphs": [
+      {
+        "hex": "U+E000",
+        "char": "",
+        "name": "uniE000"
+      },
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E00A",
+        "char": "",
+        "name": "uniE00A"
+      },
+      {
+        "hex": "U+E00B",
+        "char": "",
+        "name": "uniE00B"
+      },
+      {
+        "hex": "U+E4A0",
+        "char": "",
+        "name": "uniE4A0"
+      },
+      {
+        "hex": "U+E4A1",
+        "char": "",
+        "name": "uniE4A1"
+      },
+      {
+        "hex": "U+E4A3",
+        "char": "",
+        "name": "uniE4A3"
+      },
+      {
+        "hex": "U+E4AA",
+        "char": "",
+        "name": "uniE4AA"
+      },
+      {
+        "hex": "U+E4E0",
+        "char": "",
+        "name": "uniE4E0"
+      },
+      {
+        "hex": "U+E4E4",
+        "char": "",
+        "name": "uniE4E4"
+      }
+    ]
+  },
+  "sagoraglamour": {
+    "name": "Sagora Glamour",
+    "file": "Sagora Glamour.woff",
+    "features": [
+      "aalt",
+      "dlig",
+      "frac",
+      "liga",
+      "locl",
+      "ordn",
+      "salt",
+      "sinf",
+      "ss01",
+      "ss02",
+      "ss03",
+      "subs",
+      "sups"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02",
+      "ss03"
+    ],
+    "substitutions": {
+      "ss01": {
+        "O": "glyph00490",
+        "o": "glyph00536",
+        "s": "glyph00543"
+      },
+      "ss02": {
+        "O": "glyph00491",
+        "o": "glyph00537"
+      },
+      "ss03": {
+        "O": "glyph00492",
+        "o": "glyph00538"
+      }
+    },
+    "pua_count": 1,
+    "pua_glyphs": [
+      {
+        "hex": "U+F8FF",
+        "char": "",
+        "name": "uniF8FF"
+      }
+    ]
+  },
+  "glamourglide": {
+    "name": "Glamour Glide",
+    "file": "Glamour Glide.otf",
+    "features": [
+      "aalt",
+      "dlig",
+      "frac",
+      "liga",
+      "ordn",
+      "sups"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
+  "glamourchic": {
+    "name": "Glamour Chic",
+    "file": "Glamour Chic.otf",
+    "features": [
+      "dlig",
+      "liga"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
   "erazer": {
     "name": "ERAZER",
-    "file": "ERAZER.ttf",
+    "file": "ERAZER.woff",
     "features": [
       "aalt",
       "liga",
@@ -874,334 +1164,9 @@
       }
     ]
   },
-  "glamourchic": {
-    "name": "Glamour Chic",
-    "file": "Glamour Chic.ttf",
-    "features": [
-      "dlig",
-      "liga"
-    ],
-    "stylistic_sets": [],
-    "substitutions": {},
-    "pua_count": 0,
-    "pua_glyphs": []
-  },
-  "glamourglide": {
-    "name": "Glamour Glide",
-    "file": "Glamour Glide.ttf",
-    "features": [
-      "aalt",
-      "dlig",
-      "frac",
-      "liga",
-      "ordn",
-      "sups"
-    ],
-    "stylistic_sets": [],
-    "substitutions": {},
-    "pua_count": 0,
-    "pua_glyphs": []
-  },
-  "kaeleyaitalic": {
-    "name": "Kaeleya-Italic",
-    "file": "Kaeleya-Italic.ttf",
-    "features": [
-      "aalt",
-      "liga",
-      "salt"
-    ],
-    "stylistic_sets": [],
-    "substitutions": {},
-    "pua_count": 18,
-    "pua_glyphs": [
-      {
-        "hex": "U+E000",
-        "char": "",
-        "name": "uniE000"
-      },
-      {
-        "hex": "U+E001",
-        "char": "",
-        "name": "uniE001"
-      },
-      {
-        "hex": "U+E002",
-        "char": "",
-        "name": "uniE002"
-      },
-      {
-        "hex": "U+E003",
-        "char": "",
-        "name": "uniE003"
-      },
-      {
-        "hex": "U+E004",
-        "char": "",
-        "name": "uniE004"
-      },
-      {
-        "hex": "U+E005",
-        "char": "",
-        "name": "uniE005"
-      },
-      {
-        "hex": "U+E006",
-        "char": "",
-        "name": "uniE006"
-      },
-      {
-        "hex": "U+E007",
-        "char": "",
-        "name": "uniE007"
-      },
-      {
-        "hex": "U+E008",
-        "char": "",
-        "name": "uniE008"
-      },
-      {
-        "hex": "U+E009",
-        "char": "",
-        "name": "uniE009"
-      },
-      {
-        "hex": "U+E00A",
-        "char": "",
-        "name": "uniE00A"
-      },
-      {
-        "hex": "U+E00B",
-        "char": "",
-        "name": "uniE00B"
-      },
-      {
-        "hex": "U+E4A0",
-        "char": "",
-        "name": "uniE4A0"
-      },
-      {
-        "hex": "U+E4A1",
-        "char": "",
-        "name": "uniE4A1"
-      },
-      {
-        "hex": "U+E4A3",
-        "char": "",
-        "name": "uniE4A3"
-      },
-      {
-        "hex": "U+E4AA",
-        "char": "",
-        "name": "uniE4AA"
-      },
-      {
-        "hex": "U+E4E0",
-        "char": "",
-        "name": "uniE4E0"
-      },
-      {
-        "hex": "U+E4E4",
-        "char": "",
-        "name": "uniE4E4"
-      }
-    ]
-  },
-  "kaeleyaregular": {
-    "name": "Kaeleya-Regular",
-    "file": "Kaeleya-Regular.ttf",
-    "features": [
-      "aalt",
-      "liga",
-      "salt"
-    ],
-    "stylistic_sets": [],
-    "substitutions": {},
-    "pua_count": 18,
-    "pua_glyphs": [
-      {
-        "hex": "U+E000",
-        "char": "",
-        "name": "uniE000"
-      },
-      {
-        "hex": "U+E001",
-        "char": "",
-        "name": "uniE001"
-      },
-      {
-        "hex": "U+E002",
-        "char": "",
-        "name": "uniE002"
-      },
-      {
-        "hex": "U+E003",
-        "char": "",
-        "name": "uniE003"
-      },
-      {
-        "hex": "U+E004",
-        "char": "",
-        "name": "uniE004"
-      },
-      {
-        "hex": "U+E005",
-        "char": "",
-        "name": "uniE005"
-      },
-      {
-        "hex": "U+E006",
-        "char": "",
-        "name": "uniE006"
-      },
-      {
-        "hex": "U+E007",
-        "char": "",
-        "name": "uniE007"
-      },
-      {
-        "hex": "U+E008",
-        "char": "",
-        "name": "uniE008"
-      },
-      {
-        "hex": "U+E009",
-        "char": "",
-        "name": "uniE009"
-      },
-      {
-        "hex": "U+E00A",
-        "char": "",
-        "name": "uniE00A"
-      },
-      {
-        "hex": "U+E00B",
-        "char": "",
-        "name": "uniE00B"
-      },
-      {
-        "hex": "U+E4A0",
-        "char": "",
-        "name": "uniE4A0"
-      },
-      {
-        "hex": "U+E4A1",
-        "char": "",
-        "name": "uniE4A1"
-      },
-      {
-        "hex": "U+E4A3",
-        "char": "",
-        "name": "uniE4A3"
-      },
-      {
-        "hex": "U+E4AA",
-        "char": "",
-        "name": "uniE4AA"
-      },
-      {
-        "hex": "U+E4E0",
-        "char": "",
-        "name": "uniE4E0"
-      },
-      {
-        "hex": "U+E4E4",
-        "char": "",
-        "name": "uniE4E4"
-      }
-    ]
-  },
-  "luminara": {
-    "name": "Luminara",
-    "file": "Luminara.ttf",
-    "features": [
-      "aalt",
-      "frac",
-      "liga",
-      "ordn",
-      "salt",
-      "sups"
-    ],
-    "stylistic_sets": [],
-    "substitutions": {},
-    "pua_count": 0,
-    "pua_glyphs": []
-  },
-  "megante": {
-    "name": "Megante",
-    "file": "Megante.ttf",
-    "features": [
-      "ss01"
-    ],
-    "stylistic_sets": [
-      "ss01"
-    ],
-    "substitutions": {
-      "ss01": {
-        "A": "A.ss01",
-        "K": "K.ss01",
-        "M": "M.ss01",
-        "N": "N.ss01",
-        "Q": "Q.ss01",
-        "R": "R.ss01",
-        "V": "V.ss01",
-        "a": "a.ss01",
-        "e": "e.ss01",
-        "g": "g.ss01"
-      }
-    },
-    "pua_count": 0,
-    "pua_glyphs": []
-  },
-  "sagoraglamour": {
-    "name": "Sagora Glamour",
-    "file": "Sagora Glamour.ttf",
-    "features": [
-      "aalt",
-      "dlig",
-      "frac",
-      "liga",
-      "locl",
-      "ordn",
-      "salt",
-      "sinf",
-      "ss01",
-      "ss02",
-      "ss03",
-      "subs",
-      "sups"
-    ],
-    "stylistic_sets": [
-      "ss01",
-      "ss02",
-      "ss03"
-    ],
-    "substitutions": {
-      "ss01": {
-        "O": "O.alt1",
-        "o": "o.alt1",
-        "s": "s.alt1"
-      },
-      "ss02": {
-        "O": "O.alt2",
-        "o": "o.alt2"
-      },
-      "ss03": {
-        "O": "O.alt3",
-        "o": "o.alt3"
-      }
-    },
-    "pua_count": 1,
-    "pua_glyphs": [
-      {
-        "hex": "U+F8FF",
-        "char": "",
-        "name": "uniF8FF"
-      }
-    ]
-  },
   "thematic": {
     "name": "Thematic",
-    "file": "Thematic.ttf",
+    "file": "Thematic.woff",
     "features": [
       "aalt",
       "dlig",
@@ -1517,9 +1482,35 @@
       }
     ]
   },
+  "megante": {
+    "name": "Megante",
+    "file": "Megante.woff",
+    "features": [
+      "ss01"
+    ],
+    "stylistic_sets": [
+      "ss01"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "A.ss01",
+        "K": "K.ss01",
+        "M": "M.ss01",
+        "N": "N.ss01",
+        "Q": "Q.ss01",
+        "R": "R.ss01",
+        "V": "V.ss01",
+        "a": "a.ss01",
+        "e": "e.ss01",
+        "g": "g.ss01"
+      }
+    },
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
   "glamourcoquetteitalic": {
     "name": "Glamour Coquette-Italic",
-    "file": "Glamour Coquette-Italic.ttf",
+    "file": "Glamour Coquette-Italic.woff",
     "features": [
       "aalt",
       "dlig",
@@ -2003,7 +1994,7 @@
   },
   "glamourcoquetteregular": {
     "name": "Glamour Coquette-Regular",
-    "file": "Glamour Coquette-Regular.ttf",
+    "file": "Glamour Coquette-Regular.woff",
     "features": [
       "aalt",
       "dlig",
@@ -2485,9 +2476,9 @@
       }
     ]
   },
-  "kaliebluxuryitalic": {
-    "name": "KaliebLuxury-Italic",
-    "file": "KaliebLuxury-Italic.ttf",
+  "kaliebluxuryregular": {
+    "name": "KaliebLuxury-Regular",
+    "file": "KaliebLuxury-Regular.woff",
     "features": [
       "aalt",
       "ccmp",
@@ -2792,9 +2783,9 @@
       }
     ]
   },
-  "kaliebluxuryregular": {
-    "name": "KaliebLuxury-Regular",
-    "file": "KaliebLuxury-Regular.ttf",
+  "kaliebluxuryitalic": {
+    "name": "KaliebLuxury-Italic",
+    "file": "KaliebLuxury-Italic.woff",
     "features": [
       "aalt",
       "ccmp",

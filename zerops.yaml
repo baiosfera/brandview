@@ -1,7 +1,7 @@
 zerops:
-  - setup: brandview
+  - setup: brand
     build:
-      base: bun@1.3
+      base: alpine/bun@1.3
       prepareCommands:
         - sudo apk update && sudo apk add --no-cache inkscape ghostscript vips-dev font-dejavu unzip p7zip
       buildCommands:
@@ -10,9 +10,10 @@ zerops:
       deployFiles:
         - .
       cache:
+        - node_modules
         - ~/.bun
     run:
-      base: bun@1.3
+      base: alpine/bun@1.3
       ports:
         - port: 3000
           httpSupport: true
@@ -23,6 +24,35 @@ zerops:
         PORT: 3000
         HOST: 0.0.0.0
         NODE_ENV: production
-        BRANDS_SSOT_ROOT: /mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG
+        BRANDS_SSOT_ROOT: /mnt/localstorage,/mnt/localstorage/PROYECTOS,/mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG,/var/www/baiosfera/PROYECTOS
+        ENVATO_FONTS_ROOT: /mnt/localstorage/baiosfera/FUENTES/ENVATO
+      start: bun run server/index.ts
+
+  - setup: brandview
+    build:
+      base: alpine/bun@1.3
+      prepareCommands:
+        - sudo apk update && sudo apk add --no-cache inkscape ghostscript vips-dev font-dejavu unzip p7zip
+      buildCommands:
+        - bun install
+        - bun run build
+      deployFiles:
+        - .
+      cache:
+        - node_modules
+        - ~/.bun
+    run:
+      base: alpine/bun@1.3
+      ports:
+        - port: 3000
+          httpSupport: true
+      volume:
+        hostname: localstorage
+        mountPath: /mnt/localstorage
+      envVariables:
+        PORT: 3000
+        HOST: 0.0.0.0
+        NODE_ENV: production
+        BRANDS_SSOT_ROOT: /mnt/localstorage,/mnt/localstorage/PROYECTOS,/mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG,/var/www/baiosfera/PROYECTOS
         ENVATO_FONTS_ROOT: /mnt/localstorage/baiosfera/FUENTES/ENVATO
       start: bun run server/index.ts

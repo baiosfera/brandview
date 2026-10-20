@@ -7,21 +7,68 @@ import { randomUUID } from 'node:crypto';
 import { Resvg } from '@resvg/resvg-js';
 import sharp from 'sharp';
 
-// Resolver raíces de almacenamiento SSoT con múltiples rutas de fallback
-function resolveBrandsRoot(): string {
+// Directorios del sistema a ignorar en el descubrimiento de marcas
+const IGNORED_BRAND_DIRS = new Set([
+  '.', '..', 'lost+found', '.git', 'engram', 'freellmapi', 'sync',
+  '_extracted', 'node_modules', 'coach_report', 'raw', 'FUENTES',
+  'ASTROLOGÍA', 'PROYECTOS', 'media', 'baiosfera', '.agents', '.atl', '.bak', '.bin',
+  '.claude', '.cursor', '.gemini', '.mcv_staging', '.rclone', '.storage_fallback', 'tools', '.vscode', '.zcp'
+]);
+
+// Resolver raíces de almacenamiento SSoT con soporte multi-raíz dinámico
+function getCandidateBrandRoots(): string[] {
+  const envRoots = process.env.BRANDS_SSOT_ROOT
+    ? process.env.BRANDS_SSOT_ROOT.split(',').map(s => s.trim()).filter(Boolean)
+    : [];
   const candidates = [
-    process.env.BRANDS_SSOT_ROOT,
+    ...envRoots,
+    '/mnt/localstorage',
+    '/mnt/localstorage/PROYECTOS',
+    '/mnt/localstorage/baiosfera/PROYECTOS',
     '/mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG',
-    '/var/www/data/astrologia/DIAG',
-    '/mnt/localstorage/brands',
     '/mnt/localstorage/DIAG',
     '/mnt/localstorage/baiosfera/DIAG',
-    '/mnt/localstorage/baiosfera/baiosfera/ASTROLOGÍA/DIAG'
+    '/var/www/baiosfera/PROYECTOS',
+    '/var/www/localstorage',
+    '/var/www/data/astrologia/DIAG'
   ];
-  for (const c of candidates) {
-    if (c && existsSync(c)) return c;
+  return Array.from(new Set(candidates.filter(c => c && existsSync(c))));
+}
+
+function resolveBrandsRoot(): string {
+  const roots = getCandidateBrandRoots();
+  return roots[0] || process.env.BRANDS_SSOT_ROOT || '/mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG';
+}
+
+function findBrandTargetDir(brandName: string): string | null {
+  const roots = getCandidateBrandRoots();
+  // 1. Coincidencia directa con subcarpeta /dev
+  for (const root of roots) {
+    const devPath = join(root, brandName, 'dev');
+    if (existsSync(devPath)) return devPath;
   }
-  return process.env.BRANDS_SSOT_ROOT || '/mnt/localstorage/baiosfera/ASTROLOGÍA/DIAG';
+  // 2. Coincidencia directa en raíz de marca
+  for (const root of roots) {
+    const directPath = join(root, brandName);
+    if (existsSync(directPath)) return directPath;
+  }
+  // 3. Coincidencia insensible a mayúsculas / guiones
+  const normTarget = brandName.toLowerCase().replace(/[\s\-_]/g, '');
+  for (const root of roots) {
+    try {
+      const entries = readdirSync(root, { withFileTypes: true });
+      for (const e of entries) {
+        if (!e.isDirectory() || IGNORED_BRAND_DIRS.has(e.name)) continue;
+        const normEntry = e.name.toLowerCase().replace(/[\s\-_]/g, '');
+        if (normEntry === normTarget) {
+          const devPath = join(root, e.name, 'dev');
+          if (existsSync(devPath)) return devPath;
+          return join(root, e.name);
+        }
+      }
+    } catch {}
+  }
+  return null;
 }
 
 function resolveFontsRoot(): string {
@@ -274,50 +321,90 @@ app.get('/api/health', (c) => c.json({
   time: new Date().toISOString() 
 }));
 
-// 2. Listar Marcas / Clientes con sus Versiones Fontgen
+// 2. Listar Marcas / Clientes con sus Versiones Fontgen (Multi-raíz dinámico)
 app.get('/api/brands', (c) => {
-  const root = resolveBrandsRoot();
-  if (!existsSync(root)) return c.json({ brands: [] });
+  const roots = getCandidateBrandRoots();
+  const brandsMap = new Map<string, any>();
 
-  const entries = readdirSync(root, { withFileTypes: true });
-  const brands = entries
-    .filter(e => e.isDirectory() && !e.name.startsWith('.') && e.name !== 'coach_report' && e.name !== 'raw')
-    .map(e => {
-      const brandDir = join(root, e.name);
-      const files = readdirSync(brandDir, { recursive: true }) as string[];
-      
-      const fontgenVersions: string[] = [];
-      for (const file of files) {
-        const bfile = basename(file);
-        if ((bfile.toLowerCase().includes('fontgen') || bfile.toLowerCase().includes('fongen') || bfile.toLowerCase().includes('brandbook')) && bfile.endsWith('.md')) {
-          fontgenVersions.push(bfile);
+  for (const root of roots) {
+    try {
+      const entries = readdirSync(root, { withFileTypes: true });
+      for (const e of entries) {
+        if (!e.isDirectory() || IGNORED_BRAND_DIRS.has(e.name)) continue;
+        const brandId = e.name;
+        if (brandsMap.has(brandId)) continue;
+
+        const devDir = join(root, brandId, 'dev');
+        const brandDir = existsSync(devDir) ? devDir : join(root, brandId);
+        
+        let files: string[] = [];
+        try {
+          files = readdirSync(brandDir, { recursive: true }) as string[];
+        } catch {
+          continue;
         }
+
+        const fontgenVersions: string[] = [];
+        let hasState = false;
+        let hasFont = false;
+        let hasSymbol = false;
+        let hasChroma = false;
+        let hasKinetic = false;
+        let hasBrandbook = false;
+
+        for (const file of files) {
+          const bfile = basename(file);
+          const bfileLower = bfile.toLowerCase();
+          if ((bfileLower.includes('fontgen') || bfileLower.includes('fongen') || bfileLower.includes('brandbook')) && bfileLower.endsWith('.md')) {
+            fontgenVersions.push(bfile);
+          }
+          if (bfile === 'brandview_state.json') hasState = true;
+          if (bfile === 'font_manifest.json') hasFont = true;
+          if (bfile === 'symbol_manifest.json') hasSymbol = true;
+          if (bfile === 'chroma_manifest.json') hasChroma = true;
+          if (bfile === 'kinetic_manifest.json') hasKinetic = true;
+          if (bfile === 'brandbook.json' || bfile.startsWith('brandbook_superfull_')) hasBrandbook = true;
+        }
+
+        if (hasState) {
+          hasFont = true;
+          hasSymbol = true;
+          hasChroma = true;
+          hasKinetic = true;
+          hasBrandbook = true;
+        }
+
+        if (!hasFont && !hasSymbol && !hasChroma && !hasKinetic && !hasBrandbook && fontgenVersions.length === 0) {
+          continue;
+        }
+
+        const sortedVersions = Array.from(new Set(fontgenVersions)).sort((a, b) => b.localeCompare(a));
+
+        brandsMap.set(brandId, {
+          id: brandId,
+          name: brandId.replace(/_/g, ' '),
+          fontgen_versions: sortedVersions,
+          hasFontManifest: hasFont || sortedVersions.length > 0,
+          hasSymbolManifest: hasSymbol,
+          hasChromaManifest: hasChroma,
+          hasKineticManifest: hasKinetic,
+          hasBrandbook: hasBrandbook
+        });
       }
+    } catch {}
+  }
 
-      const sortedVersions = Array.from(new Set(fontgenVersions)).sort((a, b) => b.localeCompare(a));
-
-      return {
-        id: e.name,
-        name: e.name.replace(/_/g, ' '),
-        fontgen_versions: sortedVersions,
-        hasFontManifest: existsSync(join(brandDir, 'font_manifest.json')) || sortedVersions.length > 0,
-        hasSymbolManifest: existsSync(join(brandDir, 'symbol_manifest.json')),
-        hasChromaManifest: existsSync(join(brandDir, 'chroma_manifest.json')),
-        hasKineticManifest: existsSync(join(brandDir, 'kinetic_manifest.json')),
-        hasBrandbook: existsSync(join(brandDir, 'brandbook.json'))
-      };
-    });
+  const brands = Array.from(brandsMap.values()).sort((a, b) => a.name.localeCompare(b.name));
   return c.json({ brands });
 });
 
-// 3. Obtener Estado de una Marca con Selección Exhaustiva de Versión
+// 3. Obtener Estado de una Marca con Selección Exhaustiva de Versión e Ingestión de SSoT
 app.get('/api/brand/:name', (c) => {
-  const root = resolveBrandsRoot();
   const brandName = c.req.param('name');
   const requestedVersion = c.req.query('version'); // ej: 'v43', 'v50', 'latest'
-  const brandDir = join(root, brandName);
+  const brandDir = findBrandTargetDir(brandName);
 
-  if (!existsSync(brandDir)) {
+  if (!brandDir || !existsSync(brandDir)) {
     return c.json({ error: 'Marca no encontrada' }, 404);
   }
 
@@ -329,17 +416,131 @@ app.get('/api/brand/:name', (c) => {
     active_version: null
   };
 
+  // 1. Ingestar brandview_state.json si existe en el directorio canónico de la marca
+  const stateFile = join(brandDir, 'brandview_state.json');
+  if (existsSync(stateFile)) {
+    try {
+      const state = JSON.parse(readFileSync(stateFile, 'utf-8'));
+      data.brandview_state = state;
+      if (state.astrological_grounding) data.astrological_grounding = state.astrological_grounding;
+      if (state.active_selection) data.active_selection = state.active_selection;
+
+      // Mapeo de Tipografía
+      if (state.typography?.candidate_ecosystems) {
+        const ecos = state.typography.candidate_ecosystems;
+        const selectedId = state.active_selection?.selected_typography_id;
+        const matched = ecos.find((e: any) => e.id === selectedId) || ecos[0];
+        data.font_manifest = {
+          candidate_ecosystems: ecos,
+          selected_ecosystem: matched
+        };
+      }
+
+      // Mapeo de Símbolo Vectorial B/N
+      if (state.symbol?.candidate_vectors) {
+        const cv = state.symbol.candidate_vectors;
+        const isologos = cv.filter((v: any) => v.id?.includes('isologo') || v.type === 'isologo');
+        const monograms = cv.filter((v: any) => v.id?.includes('monogram') || v.type === 'monogram');
+        const favicons = cv.filter((v: any) => v.id?.includes('favicon') || v.id?.includes('seal') || v.type === 'favicon');
+        data.symbol_manifest = {
+          candidate_vectors: cv,
+          isologos: isologos.length > 0 ? isologos : cv,
+          monograms: monograms.length > 0 ? monograms : cv,
+          favicons: favicons.length > 0 ? favicons : cv,
+          svg: cv[0]?.svg_raw || '',
+          logo: cv[0]?.svg_raw || ''
+        };
+      }
+
+      // Mapeo de Ecosistema Cromático OKLCH
+      if (state.color?.candidate_ecosystems) {
+        const mappedEcos = state.color.candidate_ecosystems.map((eco: any) => {
+          const dark = eco.dark || {};
+          const light = eco.light || {};
+          return {
+            id: eco.id,
+            name: eco.name,
+            concept: eco.description || eco.name,
+            themes: {
+              dark: {
+                primary: { hex: dark.primary?.hex || '#E2C974', $value: dark.primary?.oklch || dark.primary?.hex || '#E2C974' },
+                secondary: { hex: dark.balance?.hex || dark.secondary?.hex || '#10B981', $value: dark.balance?.oklch || dark.secondary?.oklch || '#10B981' },
+                accent: { hex: dark.accent?.hex || '#34D399', $value: dark.accent?.oklch || dark.accent?.hex || '#34D399' },
+                background: { hex: dark.background?.hex || '#0F172A', $value: dark.background?.oklch || dark.background?.hex || '#0F172A' },
+                surface: { hex: dark.surface?.hex || '#1E293B', $value: dark.surface?.oklch || dark.surface?.hex || '#1E293B' },
+                text_primary: { hex: dark.text_primary?.hex || '#F8FAFC', $value: dark.text_primary?.oklch || dark.text_primary?.hex || '#F8FAFC' },
+                text_muted: { hex: dark.text_muted?.hex || '#94A3B8', $value: dark.text_muted?.oklch || dark.text_muted?.hex || '#94A3B8' }
+              },
+              light: {
+                primary: { hex: light.primary?.hex || '#065F46', $value: light.primary?.oklch || light.primary?.hex || '#065F46' },
+                secondary: { hex: light.balance?.hex || light.secondary?.hex || '#927218', $value: light.balance?.oklch || light.secondary?.oklch || '#927218' },
+                accent: { hex: light.accent?.hex || '#B45309', $value: light.accent?.oklch || light.accent?.hex || '#B45309' },
+                background: { hex: light.background?.hex || '#FDFDFC', $value: light.background?.oklch || light.background?.hex || '#FDFDFC' },
+                surface: { hex: light.surface?.hex || '#F4F4F2', $value: light.surface?.oklch || light.surface?.hex || '#F4F4F2' },
+                text_primary: { hex: light.text_primary?.hex || '#0F172A', $value: light.text_primary?.oklch || light.text_primary?.hex || '#0F172A' },
+                text_muted: { hex: light.text_muted?.hex || '#64748B', $value: light.text_muted?.oklch || light.text_muted?.hex || '#64748B' }
+              }
+            }
+          };
+        });
+        const selectedColorId = state.active_selection?.selected_color_id;
+        const matchedChroma = mappedEcos.find((e: any) => e.id === selectedColorId) || mappedEcos[0];
+        data.chroma_manifest = {
+          ecosystems: mappedEcos,
+          themes: matchedChroma?.themes || mappedEcos[0]?.themes,
+          accessibility_audit: state.color.accessibility_audit || {}
+        };
+      }
+
+      // Mapeo de Movimiento Cinético
+      if (state.motion?.candidate_presets) {
+        const animOpts = state.motion.candidate_presets.map((p: any) => ({
+          id: p.id,
+          name: p.name,
+          concept: p.description || p.name,
+          css_keyframes: p.css_keyframes || ''
+        }));
+        data.kinetic_manifest = {
+          animation_options: animOpts,
+          css_keyframes: animOpts[0]?.css_keyframes || '',
+          motion_tokens: state.motion.motion_tokens || {},
+          sound_bank: state.motion.sound_bank || {}
+        };
+      }
+
+      // Mapeo de Brandbook DTCG
+      if (state.compiled_dtcg_tokens) {
+        data.brandbook = state.compiled_dtcg_tokens;
+      }
+    } catch (err) {
+      console.warn('[BrandviewState Parse Warning]', err);
+    }
+  }
+
+  // 2. Cargar manifiestos individuales complementarios si existen físicamente en disco
   for (const m of manifests) {
     const file = join(brandDir, `${m}.json`);
     if (existsSync(file)) {
       try {
-        data[m] = JSON.parse(readFileSync(file, 'utf-8'));
+        const parsed = JSON.parse(readFileSync(file, 'utf-8'));
+        data[m] = { ...(data[m] || {}), ...parsed };
       } catch (err) {
-        data[m] = null;
+        if (!data[m]) data[m] = null;
       }
-    } else {
+    } else if (!data[m]) {
       data[m] = null;
     }
+  }
+
+  // Fallback para brandbook_superfull_[MARCA].json
+  if (!data.brandbook) {
+    try {
+      const bFiles = readdirSync(brandDir) as string[];
+      const superfull = bFiles.find(f => f.startsWith('brandbook_superfull_') && f.endsWith('.json'));
+      if (superfull) {
+        data.brandbook = JSON.parse(readFileSync(join(brandDir, superfull), 'utf-8'));
+      }
+    } catch {}
   }
 
   // Sanitizar font_manifest para eliminar cualquier guión o prefijo residual
@@ -437,9 +638,8 @@ app.get('/api/brand/:name', (c) => {
 
 // 3b. Compilar Brandbook Master SSoT W3C DTCG
 app.post('/api/brand/:name/compile-brandbook', async (c) => {
-  const root = resolveBrandsRoot();
   const brandName = c.req.param('name');
-  const brandDir = join(root, brandName);
+  const brandDir = findBrandTargetDir(brandName) || join(resolveBrandsRoot(), brandName);
 
   if (!existsSync(brandDir)) {
     return c.json({ error: 'Marca no encontrada' }, 404);
@@ -617,8 +817,7 @@ const server = Bun.serve({
             clearTimeout(writeDebouncers.get(brand)!);
           }
           const timer = setTimeout(() => {
-            const root = resolveBrandsRoot();
-            const brandDir = join(root, brand);
+            const brandDir = findBrandTargetDir(brand) || join(resolveBrandsRoot(), brand);
             if (!existsSync(brandDir)) mkdirSync(brandDir, { recursive: true });
 
             if (payload.manifestName && current[payload.manifestName]) {

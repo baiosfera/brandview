@@ -2,6 +2,7 @@ import { Component, createSignal, Show } from 'solid-js';
 import { jsPDF } from 'jspdf';
 import { 
   brandData,
+  setBrandData,
   selectedEcosystem, 
   setCurrentStep, 
   brandDisplayName, 
@@ -12,6 +13,14 @@ import {
   definitiveUiFont,
   definitiveAccentFont,
   definitiveSloganFont,
+  definitiveVectorId,
+  definitiveVectorSvg,
+  definitiveChromaEcosystemId,
+  definitivePrimaryColor,
+  definitiveSecondaryColor,
+  definitiveAccentColor,
+  definitiveBackgroundColor,
+  definitiveKineticPresetId,
   generatePhase
 } from '../state';
 

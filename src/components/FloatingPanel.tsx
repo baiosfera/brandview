@@ -7,7 +7,8 @@ import {
   getActiveElementStyle, 
   updateActiveElementStyle,
   envatoFonts,
-  selectedEcosystem
+  selectedEcosystem,
+  brandData
 } from '../state';
 import { loadFontDynamically } from '../utils/fontLoader';
 import { FluidSlider } from './FluidSlider';
@@ -53,10 +54,29 @@ export const FloatingPanel: Component = () => {
 
   const style = () => getActiveElementStyle();
 
+  const fontgenFonts = () => {
+    const list = new Set<string>();
+    const ecos = brandData.font_manifest?.candidate_ecosystems || [];
+    for (const eco of ecos) {
+      const clean = (s?: string) => (s || '').replace(/^Token[^\:]*:\s*/i, '').replace(/[\s\—\-\:\;\,\.]+$/g, '').trim();
+      if (eco.tokens?.display_primary?.$value) list.add(clean(eco.tokens.display_primary.$value));
+      if (eco.tokens?.ui_secondary?.$value) list.add(clean(eco.tokens.ui_secondary.$value));
+      if (eco.tokens?.accent_brand?.$value) list.add(clean(eco.tokens.accent_brand.$value));
+    }
+    return Array.from(list).filter(Boolean);
+  };
+
   const handleFontSelect = async (fontName: string) => {
     if (!fontName) return;
     const clean = fontName.replace(/\.(otf|ttf|woff|woff2)$/i, '').trim();
-    await loadFontDynamically(clean);
+    let customUrl: string | undefined;
+    const ecos = brandData.font_manifest?.candidate_ecosystems || [];
+    for (const eco of ecos) {
+      if (eco.tokens?.display_primary?.$value === clean) customUrl = eco.tokens.display_primary.google_fonts_v2_url || eco.tokens.display_primary.url;
+      if (eco.tokens?.ui_secondary?.$value === clean) customUrl = eco.tokens.ui_secondary.google_fonts_v2_url || eco.tokens.ui_secondary.url;
+      if (eco.tokens?.accent_brand?.$value === clean) customUrl = eco.tokens.accent_brand.google_fonts_v2_url || eco.tokens.accent_brand.url;
+    }
+    await loadFontDynamically(clean, customUrl);
     updateActiveElementStyle('fontFamily', clean);
   };
 
@@ -167,6 +187,15 @@ export const FloatingPanel: Component = () => {
                     Acento: {selectedEcosystem()?.tokens.accent_brand?.$value || 'Calestra'}
                   </option>
                 </optgroup>
+                <optgroup label="Fuentes del Ecosistema / Fontgen">
+                  <For each={fontgenFonts()}>
+                    {(fgFont) => (
+                      <option value={fgFont} style={{ 'font-family': `"${fgFont}", sans-serif` }}>
+                        ★ {fgFont} (Ecosistema)
+                      </option>
+                    )}
+                  </For>
+                </optgroup>
                 <optgroup label="Fuentes Envato">
                   <For each={envatoFonts()}>
                     {(f) => {
@@ -179,13 +208,36 @@ export const FloatingPanel: Component = () => {
                     }}
                   </For>
                 </optgroup>
-                <optgroup label="Google Fonts">
+                <optgroup label="Google Fonts (Serif & Editorial)">
                   <For each={[
-                    'Plus Jakarta Sans', 'Inter', 'Space Grotesk', 'Urbanist', 'Manrope', 
-                    'Host Grotesk', 'Hanken Grotesk', 'Playfair Display', 'Cinzel', 'Montserrat'
+                    'Newsreader', 'Spectral', 'Playfair Display', 'Cinzel', 'Cormorant Garamond', 
+                    'Fraunces', 'Bodoni Moda', 'Lora', 'Merriweather', 'Castoro', 'Prata', 'Italiana'
+                  ]}>
+                    {(gf) => (
+                      <option value={gf} style={{ 'font-family': `"${gf}", serif` }}>
+                        {gf}
+                      </option>
+                    )}
+                  </For>
+                </optgroup>
+                <optgroup label="Google Fonts (Sans & UI)">
+                  <For each={[
+                    'Plus Jakarta Sans', 'Instrument Sans', 'Inter', 'Space Grotesk', 'Urbanist', 
+                    'Manrope', 'Host Grotesk', 'Hanken Grotesk', 'Montserrat', 'Outfit', 'DM Sans', 'Work Sans', 'Raleway'
                   ]}>
                     {(gf) => (
                       <option value={gf} style={{ 'font-family': `"${gf}", sans-serif` }}>
+                        {gf}
+                      </option>
+                    )}
+                  </For>
+                </optgroup>
+                <optgroup label="Google Fonts (Display & Mono)">
+                  <For each={[
+                    'Syne', 'Bebas Neue', 'Oswald', 'Space Mono', 'JetBrains Mono'
+                  ]}>
+                    {(gf) => (
+                      <option value={gf} style={{ 'font-family': `"${gf}", monospace` }}>
                         {gf}
                       </option>
                     )}

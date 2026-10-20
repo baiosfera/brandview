@@ -387,12 +387,25 @@ export async function loadActiveBrand(brandId: string, version: string = 'latest
         setSelectedEcosystem(data.font_manifest.candidate_ecosystems[0]);
       }
 
-      // Pre-cargar fuentes del ecosistema
-      const eco = selectedEcosystem();
-      if (eco) {
-        if (eco.tokens.display_primary?.$value) loadFontDynamically(eco.tokens.display_primary.$value);
-        if (eco.tokens.ui_secondary?.$value) loadFontDynamically(eco.tokens.ui_secondary.$value);
-        if (eco.tokens.accent_brand?.$value) loadFontDynamically(eco.tokens.accent_brand.$value);
+      // Pre-cargar todas las fuentes de los ecosistemas candidatos de Fontgen
+      const candidateEcos = data.font_manifest?.candidate_ecosystems || [];
+      for (const ecoItem of candidateEcos) {
+        const clean = (s?: string) => (s || '').replace(/^Token[^\:]*:\s*/i, '').replace(/[\s\—\-\:\;\,\.]+$/g, '').trim();
+        if (ecoItem.tokens?.display_primary?.$value) {
+          const name = clean(ecoItem.tokens.display_primary.$value);
+          const url = ecoItem.tokens.display_primary.google_fonts_v2_url || ecoItem.tokens.display_primary.url;
+          loadFontDynamically(name, url);
+        }
+        if (ecoItem.tokens?.ui_secondary?.$value) {
+          const name = clean(ecoItem.tokens.ui_secondary.$value);
+          const url = ecoItem.tokens.ui_secondary.google_fonts_v2_url || ecoItem.tokens.ui_secondary.url;
+          loadFontDynamically(name, url);
+        }
+        if (ecoItem.tokens?.accent_brand?.$value) {
+          const name = clean(ecoItem.tokens.accent_brand.$value);
+          const url = ecoItem.tokens.accent_brand.google_fonts_v2_url || ecoItem.tokens.accent_brand.url;
+          loadFontDynamically(name, url);
+        }
       }
 
       connectWebSocket(brandId);

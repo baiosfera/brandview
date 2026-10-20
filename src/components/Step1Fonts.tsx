@@ -258,32 +258,30 @@ export const Step1Fonts: Component = () => {
     setDefinitiveFromCanvas(card.id, card.fontFamily);
   };
 
-  // Obtener o inicializar estilos de un nodo específico
+  // Obtener o inicializar estilos de un nodo específico con herencia en cascada estricta
   const getNodeStyle = (cardId: string, itemId: string, defaultFont: string, defaultSize: number, defaultAlign: 'left' | 'center' | 'right' | 'justify' = 'center'): ElementStyle => {
     const key = `${cardId}_${itemId}`;
     if (!elementsStore[key]) {
       let baseStyle: Partial<ElementStyle> = {};
-      if (itemId.includes('_w') || itemId.includes('_l')) {
-        const parentId = itemId.split('_')[0];
-        const parentKey = `${cardId}_${parentId}`;
-        if (elementsStore[parentKey]) {
-          baseStyle = { ...elementsStore[parentKey] };
-          // Do not inherit positioning, otherwise words overlap exactly at parent's offset
-          baseStyle.translateX = 0;
-          baseStyle.translateY = 0;
-          baseStyle.rotation = 0;
+      if (itemId.includes('_w') || itemId.includes('_c')) {
+        const parts = itemId.split('_');
+        const blockId = parts[0];
+        const blockKey = `${cardId}_${blockId}`;
+        const b = elementsStore[blockKey];
+        if (b) {
+          baseStyle = { ...b, translateX: 0, translateY: 0, rotation: 0, mirror: false, text: '' };
         }
       }
 
       setElementsStore(key, {
         text: '',
         fontSize: baseStyle.fontSize ?? defaultSize,
-        letterSpacing: baseStyle.letterSpacing ?? (itemId === 'slogan' ? 0.15 : (itemId === 'initials' ? 0.02 : 0.04)),
-        lineHeight: baseStyle.lineHeight ?? (itemId === 'initials' ? 1.0 : (itemId === 'body' ? 1.6 : 1.2)),
+        letterSpacing: baseStyle.letterSpacing ?? (itemId.startsWith('slogan') ? 0.15 : (itemId.startsWith('initials') ? 0.02 : 0.04)),
+        lineHeight: baseStyle.lineHeight ?? (itemId.startsWith('initials') ? 1.0 : (itemId.startsWith('body') ? 1.6 : 1.2)),
         fontFamily: baseStyle.fontFamily ?? defaultFont,
-        textTransform: baseStyle.textTransform ?? (itemId === 'slogan' || itemId === 'initials' ? 'uppercase' : 'none'),
+        textTransform: baseStyle.textTransform ?? (itemId.startsWith('slogan') || itemId.startsWith('initials') ? 'uppercase' : 'none'),
         fontWeight: baseStyle.fontWeight ?? 'normal',
-        fontStyle: baseStyle.fontStyle ?? (itemId === 'h2' ? 'italic' : 'normal'),
+        fontStyle: baseStyle.fontStyle ?? (itemId.startsWith('h2') ? 'italic' : 'normal'),
         textAlign: baseStyle.textAlign ?? defaultAlign,
         ligatures: baseStyle.ligatures ?? true,
         translateX: 0,
@@ -434,7 +432,7 @@ export const Step1Fonts: Component = () => {
 
   const hasCardFullscreen = () => cards().some(c => c.fullscreen);
 
-  // Renderizador de texto interactivo según Modo: Bloque, Palabra, Letra con Ligaduras en todos los modos
+  // Renderizador de texto interactivo según Modo: Bloque, Palabra, Letra con herencia y preservación total de formato
   const renderInteractiveContent = (
     textToRender: string,
     card: CanvasCardState,
@@ -446,73 +444,63 @@ export const Step1Fonts: Component = () => {
     const blockStyle = getNodeStyle(card.id, itemId, defaultFont, defaultSize, defaultAlign);
     const text = blockStyle.text || textToRender;
 
-    if (card.mode === 'palabra') {
-      const tokens = text.split(/(\s+)/);
-      return (
-        <span class={`pointer-events-auto inline ${blockStyle.ligatures ? 'ligatures-active' : ''}`} style={{
-          ...(blockStyle.ligatures ? {
-            'font-feature-settings': '"liga" 1, "dlig" 1, "clig" 1, "calt" 1',
-            'font-variant-ligatures': 'normal'
-          } : {
-            'font-feature-settings': '"liga" 0',
-            'font-variant-ligatures': 'none'
-          })
-        }}>
-          {tokens.map((token, idx) => {
-            if (/^\s+$/.test(token)) {
-              return <span>{token}</span>;
-            }
-            const wKey = `${itemId}_w${idx}`;
-            const wStyle = elementsStore[`${card.id}_${wKey}`];
-            const wordText = wStyle?.text || token;
-            const isSel = isSelected(card.id, wKey);
-            const isLig = wStyle?.ligatures !== undefined ? wStyle.ligatures : blockStyle.ligatures;
+    // Tokenizar texto preservando espacios y calculando índice global de caracteres
+    const rawTokens = text.split(/(\\s+)/);
+    let globalCharIdx = 0;
+    const tokens = rawTokens.map((token, wIdx) => {
+      const isSpace = /^\\s+$/.test(token);
+      const chars = token.split('').map((char) => {
+        const info = { char, cIdx: globalCharIdx };
+        globalCharIdx++;
+        return info;
+      });
+      return { token, isSpace, wIdx, chars };
+    });
 
-            return (
-              <span
-                onClick={(e) => {
-                  e.stopPropagation();
-                  selectElement(
-                    card.id, 
-                    wKey, 
-                    `Palabra: "${token}"`, 
-                    wStyle?.fontFamily || blockStyle.fontFamily || defaultFont, 
-                    wStyle?.fontSize || blockStyle.fontSize || defaultSize, 
-                    defaultAlign
-                  );
-                }}
-                class={`inline transition cursor-pointer ${
-                  isSel ? 'outline-dashed outline-2 outline-emerald-400 bg-emerald-500/20 rounded px-0.5' : 'hover:outline-dashed hover:outline-1 hover:outline-emerald-400/60 rounded px-0.5'
-                } ${isLig ? 'ligatures-active' : ''}`}
-                style={{
-                  ...(wStyle?.fontFamily ? { 'font-family': `"${wStyle.fontFamily}", sans-serif` } : {}),
-                  ...(wStyle?.fontSize ? { 'font-size': `${wStyle.fontSize}px` } : {}),
-                  ...(wStyle?.letterSpacing !== undefined ? { 'letter-spacing': `${wStyle.letterSpacing}em` } : {}),
-                  ...(wStyle?.fontWeight ? { 'font-weight': wStyle.fontWeight } : {}),
-                  ...(wStyle?.fontStyle ? { 'font-style': wStyle.fontStyle } : {}),
-                  ...(wStyle?.textTransform ? { 'text-transform': wStyle.textTransform } : {}),
-                  ...(isLig ? {
-                    'font-feature-settings': '"liga" 1, "dlig" 1, "clig" 1, "calt" 1',
-                    'font-variant-ligatures': 'normal'
-                  } : {
-                    'font-feature-settings': '"liga" 0',
-                    'font-variant-ligatures': 'none'
-                  }),
-                  ...(wStyle?.translateX || wStyle?.translateY || wStyle?.rotation || wStyle?.mirror ? {
-                    'transform': `translate(${wStyle.translateX || 0}px, ${wStyle.translateY || 0}px) rotate(${wStyle.rotation || 0}deg) scaleX(${wStyle.mirror ? -1 : 1})`
-                  } : {})
-                }}
-              >
-                {wordText}
-              </span>
-            );
-          })}
-        </span>
-      );
-    }
+    // Helper: estilo efectivo de una palabra heredando de blockStyle
+    const getWordEffective = (wIdx: number) => {
+      const wKey = `${itemId}_w${wIdx}`;
+      const w = elementsStore[`${card.id}_${wKey}`];
+      return {
+        text: w?.text || '',
+        fontFamily: w?.fontFamily || blockStyle.fontFamily || defaultFont,
+        fontSize: w?.fontSize ?? blockStyle.fontSize ?? defaultSize,
+        letterSpacing: w?.letterSpacing ?? blockStyle.letterSpacing ?? 0.04,
+        lineHeight: w?.lineHeight ?? blockStyle.lineHeight ?? 1.2,
+        fontWeight: w?.fontWeight || blockStyle.fontWeight || 'normal',
+        fontStyle: w?.fontStyle || blockStyle.fontStyle || 'normal',
+        textTransform: w?.textTransform || blockStyle.textTransform || 'none',
+        ligatures: w?.ligatures ?? blockStyle.ligatures ?? true,
+        translateX: w?.translateX ?? 0,
+        translateY: w?.translateY ?? 0,
+        rotation: w?.rotation ?? 0,
+        mirror: w?.mirror ?? false
+      };
+    };
+
+    // Helper: estilo efectivo de una letra heredando de palabra y bloque
+    const getCharEffective = (cIdx: number, wIdx: number) => {
+      const cKey = `${itemId}_c${cIdx}`;
+      const c = elementsStore[`${card.id}_${cKey}`];
+      const wEff = getWordEffective(wIdx);
+      return {
+        text: c?.text || '',
+        fontFamily: c?.fontFamily || wEff.fontFamily,
+        fontSize: c?.fontSize ?? wEff.fontSize,
+        letterSpacing: c?.letterSpacing ?? wEff.letterSpacing,
+        lineHeight: c?.lineHeight ?? wEff.lineHeight,
+        fontWeight: c?.fontWeight || wEff.fontWeight,
+        fontStyle: c?.fontStyle || wEff.fontStyle,
+        textTransform: c?.textTransform || wEff.textTransform,
+        ligatures: c?.ligatures ?? wEff.ligatures,
+        translateX: c?.translateX ?? 0,
+        translateY: c?.translateY ?? 0,
+        rotation: c?.rotation ?? 0,
+        mirror: c?.mirror ?? false
+      };
+    };
 
     if (card.mode === 'letra') {
-      const chars = text.split('');
       return (
         <span class={`pointer-events-auto inline ${blockStyle.ligatures ? 'ligatures-active' : ''}`} style={{
           ...(blockStyle.ligatures ? {
@@ -523,49 +511,59 @@ export const Step1Fonts: Component = () => {
             'font-variant-ligatures': 'none'
           })
         }}>
-          {chars.map((c, cIdx) => {
-            const cKey = `${itemId}_c${cIdx}`;
-            const cStyle = elementsStore[`${card.id}_${cKey}`];
-            const charText = cStyle?.text || c;
-            const isSel = isSelected(card.id, cKey);
-            const isLig = cStyle?.ligatures !== undefined ? cStyle.ligatures : blockStyle.ligatures;
-
+          {tokens.map((t) => {
+            if (t.isSpace) {
+              return <span>{t.token}</span>;
+            }
             return (
-              <span
-                onClick={(e) => {
-                  e.stopPropagation();
-                  selectElement(
-                    card.id, 
-                    cKey, 
-                    `Letra: "${c}"`, 
-                    cStyle?.fontFamily || blockStyle.fontFamily || defaultFont, 
-                    cStyle?.fontSize || blockStyle.fontSize || defaultSize, 
-                    defaultAlign
+              <span class="inline">
+                {t.chars.map((ch) => {
+                  const cKey = `${itemId}_c${ch.cIdx}`;
+                  const cEff = getCharEffective(ch.cIdx, t.wIdx);
+                  const isSel = isSelected(card.id, cKey);
+                  const hasOverride = !!elementsStore[`${card.id}_${cKey}`];
+
+                  return (
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        selectElement(
+                          card.id,
+                          cKey,
+                          `Letra: "${ch.char}"`,
+                          cEff.fontFamily,
+                          cEff.fontSize,
+                          defaultAlign
+                        );
+                      }}
+                      class={`inline transition cursor-pointer ${
+                        isSel ? 'outline-dashed outline-2 outline-emerald-400 bg-emerald-500/20 rounded' :
+                        hasOverride ? 'outline-dotted outline-1 outline-emerald-400/70 rounded' :
+                        'hover:outline-dashed hover:outline-1 hover:outline-emerald-400/60 rounded'
+                      } ${cEff.ligatures ? 'ligatures-active' : ''}`}
+                      style={{
+                        'font-family': `"${cEff.fontFamily}", sans-serif`,
+                        'font-size': `${cEff.fontSize}px`,
+                        'letter-spacing': `${cEff.letterSpacing}em`,
+                        'font-weight': cEff.fontWeight,
+                        'font-style': cEff.fontStyle,
+                        'text-transform': cEff.textTransform,
+                        ...(cEff.ligatures ? {
+                          'font-feature-settings': '"liga" 1, "dlig" 1, "clig" 1, "calt" 1',
+                          'font-variant-ligatures': 'normal'
+                        } : {
+                          'font-feature-settings': '"liga" 0',
+                          'font-variant-ligatures': 'none'
+                        }),
+                        ...(cEff.translateX || cEff.translateY || cEff.rotation || cEff.mirror ? {
+                          'transform': `translate(${cEff.translateX || 0}px, ${cEff.translateY || 0}px) rotate(${cEff.rotation || 0}deg) scaleX(${cEff.mirror ? -1 : 1})`
+                        } : {})
+                      }}
+                    >
+                      {cEff.text || (ch.char === ' ' ? " " : ch.char)}
+                    </span>
                   );
-                }}
-                class={`inline transition cursor-pointer ${
-                  isSel ? 'outline-dashed outline-2 outline-emerald-400 bg-emerald-500/20 rounded' : 'hover:outline-dashed hover:outline-1 hover:outline-emerald-400/60 rounded'
-                } ${isLig ? 'ligatures-active' : ''}`}
-                style={{
-                  ...(cStyle?.fontFamily ? { 'font-family': `"${cStyle.fontFamily}", sans-serif` } : {}),
-                  ...(cStyle?.fontSize ? { 'font-size': `${cStyle.fontSize}px` } : {}),
-                  ...(cStyle?.letterSpacing !== undefined ? { 'letter-spacing': `${cStyle.letterSpacing}em` } : {}),
-                  ...(cStyle?.fontWeight ? { 'font-weight': cStyle.fontWeight } : {}),
-                  ...(cStyle?.fontStyle ? { 'font-style': cStyle.fontStyle } : {}),
-                  ...(cStyle?.textTransform ? { 'text-transform': cStyle.textTransform } : {}),
-                  ...(isLig ? {
-                    'font-feature-settings': '"liga" 1, "dlig" 1, "clig" 1, "calt" 1',
-                    'font-variant-ligatures': 'normal'
-                  } : {
-                    'font-feature-settings': '"liga" 0',
-                    'font-variant-ligatures': 'none'
-                  }),
-                  ...(cStyle?.translateX || cStyle?.translateY || cStyle?.rotation || cStyle?.mirror ? {
-                    'transform': `translate(${cStyle.translateX || 0}px, ${cStyle.translateY || 0}px) rotate(${cStyle.rotation || 0}deg) scaleX(${cStyle.mirror ? -1 : 1})`
-                  } : {})
-                }}
-              >
-                {charText === ' ' ? '\u00A0' : charText}
+                })}
               </span>
             );
           })}
@@ -573,7 +571,153 @@ export const Step1Fonts: Component = () => {
       );
     }
 
-    // Modo Bloque por defecto
+    if (card.mode === 'palabra') {
+      return (
+        <span class={`pointer-events-auto inline ${blockStyle.ligatures ? 'ligatures-active' : ''}`} style={{
+          ...(blockStyle.ligatures ? {
+            'font-feature-settings': '"liga" 1, "dlig" 1, "clig" 1, "calt" 1',
+            'font-variant-ligatures': 'normal'
+          } : {
+            'font-feature-settings': '"liga" 0',
+            'font-variant-ligatures': 'none'
+          })
+        }}>
+          {tokens.map((t) => {
+            if (t.isSpace) {
+              return <span>{t.token}</span>;
+            }
+            const wKey = `${itemId}_w${t.wIdx}`;
+            const wEff = getWordEffective(t.wIdx);
+            const isSel = isSelected(card.id, wKey);
+            const hasWordOverride = !!elementsStore[`${card.id}_${wKey}`];
+            const hasCharOverrides = t.chars.some(ch => !!elementsStore[`${card.id}_${itemId}_c${ch.cIdx}`]);
+
+            return (
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  selectElement(
+                    card.id,
+                    wKey,
+                    `Palabra: "${t.token}"`,
+                    wEff.fontFamily,
+                    wEff.fontSize,
+                    defaultAlign
+                  );
+                }}
+                class={`inline transition cursor-pointer ${
+                  isSel ? 'outline-dashed outline-2 outline-emerald-400 bg-emerald-500/20 rounded px-0.5' :
+                  hasWordOverride ? 'outline-dotted outline-1 outline-emerald-400/70 rounded px-0.5' :
+                  'hover:outline-dashed hover:outline-1 hover:outline-emerald-400/60 rounded px-0.5'
+                } ${wEff.ligatures ? 'ligatures-active' : ''}`}
+                style={{
+                  'font-family': `"${wEff.fontFamily}", sans-serif`,
+                  'font-size': `${wEff.fontSize}px`,
+                  'letter-spacing': `${wEff.letterSpacing}em`,
+                  'font-weight': wEff.fontWeight,
+                  'font-style': wEff.fontStyle,
+                  'text-transform': wEff.textTransform,
+                  ...(wEff.ligatures ? {
+                    'font-feature-settings': '"liga" 1, "dlig" 1, "clig" 1, "calt" 1',
+                    'font-variant-ligatures': 'normal'
+                  } : {
+                    'font-feature-settings': '"liga" 0',
+                    'font-variant-ligatures': 'none'
+                  }),
+                  ...(wEff.translateX || wEff.translateY || wEff.rotation || wEff.mirror ? {
+                    'transform': `translate(${wEff.translateX || 0}px, ${wEff.translateY || 0}px) rotate(${wEff.rotation || 0}deg) scaleX(${wEff.mirror ? -1 : 1})`
+                  } : {})
+                }}
+              >
+                {hasCharOverrides ? (
+                  t.chars.map(ch => {
+                    const cEff = getCharEffective(ch.cIdx, t.wIdx);
+                    return (
+                      <span
+                        class="inline"
+                        style={{
+                          'font-family': `"${cEff.fontFamily}", sans-serif`,
+                          'font-size': `${cEff.fontSize}px`,
+                          'letter-spacing': `${cEff.letterSpacing}em`,
+                          'font-weight': cEff.fontWeight,
+                          'font-style': cEff.fontStyle,
+                          'text-transform': cEff.textTransform,
+                          ...(cEff.translateX || cEff.translateY || cEff.rotation || cEff.mirror ? {
+                            'transform': `translate(${cEff.translateX || 0}px, ${cEff.translateY || 0}px) rotate(${cEff.rotation || 0}deg) scaleX(${cEff.mirror ? -1 : 1})`
+                          } : {})
+                        }}
+                      >
+                        {cEff.text || (ch.char === ' ' ? " " : ch.char)}
+                      </span>
+                    );
+                  })
+                ) : (
+                  wEff.text || t.token
+                )}
+              </span>
+            );
+          })}
+        </span>
+      );
+    }
+
+    // Modo Bloque por defecto: si existen personalizaciones individuales previas, se preservan visualmente
+    const hasAnyChildOverrides = tokens.some(t => 
+      !t.isSpace && (
+        !!elementsStore[`${card.id}_${itemId}_w${t.wIdx}`] ||
+        t.chars.some(ch => !!elementsStore[`${card.id}_${itemId}_c${ch.cIdx}`])
+      )
+    );
+
+    if (hasAnyChildOverrides) {
+      return (
+        <span class={`pointer-events-none inline ${blockStyle.ligatures ? 'ligatures-active' : ''}`}>
+          {tokens.map(t => {
+            if (t.isSpace) return <span>{t.token}</span>;
+            const wEff = getWordEffective(t.wIdx);
+            return (
+              <span
+                class="inline"
+                style={{
+                  'font-family': `"${wEff.fontFamily}", sans-serif`,
+                  'font-size': `${wEff.fontSize}px`,
+                  'letter-spacing': `${wEff.letterSpacing}em`,
+                  'font-weight': wEff.fontWeight,
+                  'font-style': wEff.fontStyle,
+                  'text-transform': wEff.textTransform,
+                  ...(wEff.translateX || wEff.translateY || wEff.rotation || wEff.mirror ? {
+                    'transform': `translate(${wEff.translateX || 0}px, ${wEff.translateY || 0}px) rotate(${wEff.rotation || 0}deg) scaleX(${wEff.mirror ? -1 : 1})`
+                  } : {})
+                }}
+              >
+                {t.chars.map(ch => {
+                  const cEff = getCharEffective(ch.cIdx, t.wIdx);
+                  return (
+                    <span
+                      class="inline"
+                      style={{
+                        'font-family': `"${cEff.fontFamily}", sans-serif`,
+                        'font-size': `${cEff.fontSize}px`,
+                        'letter-spacing': `${cEff.letterSpacing}em`,
+                        'font-weight': cEff.fontWeight,
+                        'font-style': cEff.fontStyle,
+                        'text-transform': cEff.textTransform,
+                        ...(cEff.translateX || cEff.translateY || cEff.rotation || cEff.mirror ? {
+                          'transform': `translate(${cEff.translateX || 0}px, ${cEff.translateY || 0}px) rotate(${cEff.rotation || 0}deg) scaleX(${cEff.mirror ? -1 : 1})`
+                        } : {})
+                      }}
+                    >
+                      {cEff.text || (ch.char === ' ' ? " " : ch.char)}
+                    </span>
+                  );
+                })}
+              </span>
+            );
+          })}
+        </span>
+      );
+    }
+
     return (
       <span 
         class={blockStyle.ligatures ? 'ligatures-active' : ''}

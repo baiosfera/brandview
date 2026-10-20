@@ -1,29 +1,38 @@
-import { createSignal, createEffect, onCleanup } from 'solid-js';
+import { Component } from 'solid-js';
 
-export const FluidSlider = (props: { min: string|number; max: string|number; value: number; onChange: (v: number) => void }) => {
-  const [local, setLocal] = createSignal(props.value);
-  let inputRef: HTMLInputElement | undefined;
+export interface FluidSliderProps {
+  min: string | number;
+  max: string | number;
+  step?: string | number;
+  value: number;
+  onChange: (v: number) => void;
+  class?: string;
+}
 
-  // Sync from props ONLY if not dragging
-  createEffect(() => {
-    if (document.activeElement !== inputRef) {
-      setLocal(props.value);
-    }
-  });
-
+export const FluidSlider: Component<FluidSliderProps> = (props) => {
   return (
     <input 
-      ref={inputRef}
       type="range" 
       min={props.min} 
       max={props.max} 
-      value={local()}
+      step={props.step ?? 1}
+      value={typeof props.value === 'number' && !isNaN(props.value) ? props.value : (parseFloat(String(props.min)) || 0)}
       onInput={(e) => {
         const val = parseFloat(e.currentTarget.value);
-        setLocal(val);
-        props.onChange(val);
+        if (!isNaN(val)) {
+          props.onChange(val);
+        }
       }}
-      class="w-full accent-emerald-500 cursor-pointer h-1.5"
+      onChange={(e) => {
+        const val = parseFloat(e.currentTarget.value);
+        if (!isNaN(val)) {
+          props.onChange(val);
+        }
+      }}
+      onPointerDown={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
+      class={`w-full accent-emerald-500 cursor-pointer h-2 bg-gray-800 rounded-lg appearance-none focus:outline-none focus:ring-1 focus:ring-emerald-400 ${props.class || ''}`}
     />
   );
 };

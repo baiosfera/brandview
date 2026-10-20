@@ -1,0 +1,3102 @@
+{
+  "averne": {
+    "name": "Averne",
+    "file": "Averne.ttf",
+    "features": [],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
+  "biancha": {
+    "name": "Biancha",
+    "file": "Biancha.ttf",
+    "features": [
+      "aalt",
+      "liga",
+      "ordn",
+      "salt",
+      "ss01",
+      "ss02",
+      "ss03",
+      "ss04",
+      "ss05",
+      "ss06",
+      "ss07",
+      "ss08",
+      "ss09",
+      "sups"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02",
+      "ss03",
+      "ss04",
+      "ss05",
+      "ss06",
+      "ss07",
+      "ss08",
+      "ss09"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "uniF000",
+        "B": "uniF002",
+        "D": "uniF003",
+        "E": "uniF004",
+        "F": "uniF005",
+        "H": "uniF006",
+        "I": "uniF007",
+        "J": "uniF008",
+        "K": "uniF009",
+        "L": "uniF00B",
+        "M": "uniF00C",
+        "N": "uniF00D",
+        "P": "uniF00E",
+        "R": "uniF00F",
+        "T": "uniF011",
+        "U": "uniF012",
+        "V": "uniF013",
+        "W": "uniF014",
+        "X": "uniF015",
+        "Y": "uniF017",
+        "a": "uniF018",
+        "b": "uniF01B",
+        "d": "uniF01D",
+        "f": "uniF01F",
+        "g": "uniF021",
+        "h": "uniF022",
+        "i": "uniF026",
+        "j": "uniF028",
+        "k": "uniF029",
+        "l": "uniF02E",
+        "m": "uniF036",
+        "n": "uniF03B",
+        "p": "uniF040",
+        "q": "uniF043",
+        "r": "uniF046",
+        "t": "uniF049",
+        "u": "uniF04E"
+      },
+      "ss02": {
+        "A": "uniF001",
+        "K": "uniF00A",
+        "R": "uniF010",
+        "X": "uniF016",
+        "a": "uniF019",
+        "b": "uniF01C",
+        "d": "uniF01E",
+        "f": "uniF020",
+        "h": "uniF023",
+        "i": "uniF027",
+        "k": "uniF02A",
+        "l": "uniF02F",
+        "m": "uniF037",
+        "n": "uniF03C",
+        "p": "uniF041",
+        "q": "uniF044",
+        "r": "uniF047",
+        "t": "uniF04A",
+        "u": "uniF04F"
+      },
+      "ss03": {
+        "a": "uniF01A",
+        "h": "uniF024",
+        "i": "uniF06B",
+        "k": "uniF02B",
+        "l": "uniF030",
+        "m": "uniF038",
+        "n": "uniF03D",
+        "p": "uniF042",
+        "q": "uniF045",
+        "r": "uniF048",
+        "t": "uniF04B",
+        "u": "uniF06F"
+      },
+      "ss04": {
+        "a": "uniF069",
+        "h": "uniF025",
+        "k": "uniF02C",
+        "l": "uniF031",
+        "m": "uniF039",
+        "n": "uniF03E",
+        "t": "uniF04C"
+      },
+      "ss05": {
+        "h": "uniF06A",
+        "k": "uniF02D",
+        "l": "uniF032",
+        "m": "uniF03A",
+        "n": "uniF03F",
+        "t": "uniF04D"
+      },
+      "ss06": {
+        "l": "uniF033",
+        "m": "uniF06D",
+        "n": "uniF06E"
+      },
+      "ss07": {
+        "l": "uniF034"
+      },
+      "ss08": {
+        "l": "uniF035"
+      },
+      "ss09": {
+        "l": "uniF06C"
+      }
+    },
+    "pua_count": 105,
+    "pua_glyphs": [
+      {
+        "hex": "U+F000",
+        "char": "",
+        "name": "uniF000"
+      },
+      {
+        "hex": "U+F001",
+        "char": "",
+        "name": "uniF001"
+      },
+      {
+        "hex": "U+F002",
+        "char": "",
+        "name": "uniF002"
+      },
+      {
+        "hex": "U+F003",
+        "char": "",
+        "name": "uniF003"
+      },
+      {
+        "hex": "U+F004",
+        "char": "",
+        "name": "uniF004"
+      },
+      {
+        "hex": "U+F005",
+        "char": "",
+        "name": "uniF005"
+      },
+      {
+        "hex": "U+F006",
+        "char": "",
+        "name": "uniF006"
+      },
+      {
+        "hex": "U+F007",
+        "char": "",
+        "name": "uniF007"
+      },
+      {
+        "hex": "U+F008",
+        "char": "",
+        "name": "uniF008"
+      },
+      {
+        "hex": "U+F009",
+        "char": "",
+        "name": "uniF009"
+      },
+      {
+        "hex": "U+F00A",
+        "char": "",
+        "name": "uniF00A"
+      },
+      {
+        "hex": "U+F00B",
+        "char": "",
+        "name": "uniF00B"
+      },
+      {
+        "hex": "U+F00C",
+        "char": "",
+        "name": "uniF00C"
+      },
+      {
+        "hex": "U+F00D",
+        "char": "",
+        "name": "uniF00D"
+      },
+      {
+        "hex": "U+F00E",
+        "char": "",
+        "name": "uniF00E"
+      },
+      {
+        "hex": "U+F00F",
+        "char": "",
+        "name": "uniF00F"
+      },
+      {
+        "hex": "U+F010",
+        "char": "",
+        "name": "uniF010"
+      },
+      {
+        "hex": "U+F011",
+        "char": "",
+        "name": "uniF011"
+      },
+      {
+        "hex": "U+F012",
+        "char": "",
+        "name": "uniF012"
+      },
+      {
+        "hex": "U+F013",
+        "char": "",
+        "name": "uniF013"
+      },
+      {
+        "hex": "U+F014",
+        "char": "",
+        "name": "uniF014"
+      },
+      {
+        "hex": "U+F015",
+        "char": "",
+        "name": "uniF015"
+      },
+      {
+        "hex": "U+F016",
+        "char": "",
+        "name": "uniF016"
+      },
+      {
+        "hex": "U+F017",
+        "char": "",
+        "name": "uniF017"
+      },
+      {
+        "hex": "U+F018",
+        "char": "",
+        "name": "uniF018"
+      },
+      {
+        "hex": "U+F019",
+        "char": "",
+        "name": "uniF019"
+      },
+      {
+        "hex": "U+F01A",
+        "char": "",
+        "name": "uniF01A"
+      },
+      {
+        "hex": "U+F01B",
+        "char": "",
+        "name": "uniF01B"
+      },
+      {
+        "hex": "U+F01C",
+        "char": "",
+        "name": "uniF01C"
+      },
+      {
+        "hex": "U+F01D",
+        "char": "",
+        "name": "uniF01D"
+      },
+      {
+        "hex": "U+F01E",
+        "char": "",
+        "name": "uniF01E"
+      },
+      {
+        "hex": "U+F01F",
+        "char": "",
+        "name": "uniF01F"
+      },
+      {
+        "hex": "U+F020",
+        "char": "",
+        "name": "uniF020"
+      },
+      {
+        "hex": "U+F021",
+        "char": "",
+        "name": "uniF021"
+      },
+      {
+        "hex": "U+F022",
+        "char": "",
+        "name": "uniF022"
+      },
+      {
+        "hex": "U+F023",
+        "char": "",
+        "name": "uniF023"
+      },
+      {
+        "hex": "U+F024",
+        "char": "",
+        "name": "uniF024"
+      },
+      {
+        "hex": "U+F025",
+        "char": "",
+        "name": "uniF025"
+      },
+      {
+        "hex": "U+F026",
+        "char": "",
+        "name": "uniF026"
+      },
+      {
+        "hex": "U+F027",
+        "char": "",
+        "name": "uniF027"
+      },
+      {
+        "hex": "U+F028",
+        "char": "",
+        "name": "uniF028"
+      },
+      {
+        "hex": "U+F029",
+        "char": "",
+        "name": "uniF029"
+      },
+      {
+        "hex": "U+F02A",
+        "char": "",
+        "name": "uniF02A"
+      },
+      {
+        "hex": "U+F02B",
+        "char": "",
+        "name": "uniF02B"
+      },
+      {
+        "hex": "U+F02C",
+        "char": "",
+        "name": "uniF02C"
+      },
+      {
+        "hex": "U+F02D",
+        "char": "",
+        "name": "uniF02D"
+      },
+      {
+        "hex": "U+F02E",
+        "char": "",
+        "name": "uniF02E"
+      },
+      {
+        "hex": "U+F02F",
+        "char": "",
+        "name": "uniF02F"
+      },
+      {
+        "hex": "U+F030",
+        "char": "",
+        "name": "uniF030"
+      },
+      {
+        "hex": "U+F031",
+        "char": "",
+        "name": "uniF031"
+      },
+      {
+        "hex": "U+F032",
+        "char": "",
+        "name": "uniF032"
+      },
+      {
+        "hex": "U+F033",
+        "char": "",
+        "name": "uniF033"
+      },
+      {
+        "hex": "U+F034",
+        "char": "",
+        "name": "uniF034"
+      },
+      {
+        "hex": "U+F035",
+        "char": "",
+        "name": "uniF035"
+      },
+      {
+        "hex": "U+F036",
+        "char": "",
+        "name": "uniF036"
+      },
+      {
+        "hex": "U+F037",
+        "char": "",
+        "name": "uniF037"
+      },
+      {
+        "hex": "U+F038",
+        "char": "",
+        "name": "uniF038"
+      },
+      {
+        "hex": "U+F039",
+        "char": "",
+        "name": "uniF039"
+      },
+      {
+        "hex": "U+F03A",
+        "char": "",
+        "name": "uniF03A"
+      },
+      {
+        "hex": "U+F03B",
+        "char": "",
+        "name": "uniF03B"
+      },
+      {
+        "hex": "U+F03C",
+        "char": "",
+        "name": "uniF03C"
+      },
+      {
+        "hex": "U+F03D",
+        "char": "",
+        "name": "uniF03D"
+      },
+      {
+        "hex": "U+F03E",
+        "char": "",
+        "name": "uniF03E"
+      },
+      {
+        "hex": "U+F03F",
+        "char": "",
+        "name": "uniF03F"
+      },
+      {
+        "hex": "U+F040",
+        "char": "",
+        "name": "uniF040"
+      },
+      {
+        "hex": "U+F041",
+        "char": "",
+        "name": "uniF041"
+      },
+      {
+        "hex": "U+F042",
+        "char": "",
+        "name": "uniF042"
+      },
+      {
+        "hex": "U+F043",
+        "char": "",
+        "name": "uniF043"
+      },
+      {
+        "hex": "U+F044",
+        "char": "",
+        "name": "uniF044"
+      },
+      {
+        "hex": "U+F045",
+        "char": "",
+        "name": "uniF045"
+      },
+      {
+        "hex": "U+F046",
+        "char": "",
+        "name": "uniF046"
+      },
+      {
+        "hex": "U+F047",
+        "char": "",
+        "name": "uniF047"
+      },
+      {
+        "hex": "U+F048",
+        "char": "",
+        "name": "uniF048"
+      },
+      {
+        "hex": "U+F049",
+        "char": "",
+        "name": "uniF049"
+      },
+      {
+        "hex": "U+F04A",
+        "char": "",
+        "name": "uniF04A"
+      },
+      {
+        "hex": "U+F04B",
+        "char": "",
+        "name": "uniF04B"
+      },
+      {
+        "hex": "U+F04C",
+        "char": "",
+        "name": "uniF04C"
+      },
+      {
+        "hex": "U+F04D",
+        "char": "",
+        "name": "uniF04D"
+      },
+      {
+        "hex": "U+F04E",
+        "char": "",
+        "name": "uniF04E"
+      },
+      {
+        "hex": "U+F04F",
+        "char": "",
+        "name": "uniF04F"
+      },
+      {
+        "hex": "U+F057",
+        "char": "",
+        "name": "uniF057"
+      },
+      {
+        "hex": "U+F058",
+        "char": "",
+        "name": "uniF058"
+      },
+      {
+        "hex": "U+F059",
+        "char": "",
+        "name": "uniF059"
+      },
+      {
+        "hex": "U+F05A",
+        "char": "",
+        "name": "uniF05A"
+      },
+      {
+        "hex": "U+F05B",
+        "char": "",
+        "name": "uniF05B"
+      },
+      {
+        "hex": "U+F05C",
+        "char": "",
+        "name": "uniF05C"
+      },
+      {
+        "hex": "U+F05D",
+        "char": "",
+        "name": "uniF05D"
+      },
+      {
+        "hex": "U+F05E",
+        "char": "",
+        "name": "uniF05E"
+      },
+      {
+        "hex": "U+F05F",
+        "char": "",
+        "name": "uniF05F"
+      },
+      {
+        "hex": "U+F060",
+        "char": "",
+        "name": "uniF060"
+      },
+      {
+        "hex": "U+F061",
+        "char": "",
+        "name": "uniF061"
+      },
+      {
+        "hex": "U+F062",
+        "char": "",
+        "name": "uniF062"
+      },
+      {
+        "hex": "U+F063",
+        "char": "",
+        "name": "uniF063"
+      },
+      {
+        "hex": "U+F064",
+        "char": "",
+        "name": "uniF064"
+      },
+      {
+        "hex": "U+F065",
+        "char": "",
+        "name": "uniF065"
+      },
+      {
+        "hex": "U+F066",
+        "char": "",
+        "name": "uniF066"
+      },
+      {
+        "hex": "U+F067",
+        "char": "",
+        "name": "uniF067"
+      },
+      {
+        "hex": "U+F068",
+        "char": "",
+        "name": "uniF068"
+      },
+      {
+        "hex": "U+F069",
+        "char": "",
+        "name": "uniF069"
+      },
+      {
+        "hex": "U+F06A",
+        "char": "",
+        "name": "uniF06A"
+      },
+      {
+        "hex": "U+F06B",
+        "char": "",
+        "name": "uniF06B"
+      },
+      {
+        "hex": "U+F06C",
+        "char": "",
+        "name": "uniF06C"
+      },
+      {
+        "hex": "U+F06D",
+        "char": "",
+        "name": "uniF06D"
+      },
+      {
+        "hex": "U+F06E",
+        "char": "",
+        "name": "uniF06E"
+      },
+      {
+        "hex": "U+F06F",
+        "char": "",
+        "name": "uniF06F"
+      }
+    ]
+  },
+  "erazer": {
+    "name": "ERAZER",
+    "file": "ERAZER.ttf",
+    "features": [
+      "aalt",
+      "liga",
+      "ordn",
+      "salt",
+      "ss01",
+      "sups"
+    ],
+    "stylistic_sets": [
+      "ss01"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "uniF000.alt1",
+        "E": "uniF001.alt1",
+        "K": "uniF003.alt1",
+        "M": "uniF004.alt1",
+        "S": "uniF002.alt1",
+        "V": "uniF005.alt1",
+        "W": "uniF006.alt1",
+        "a": "uniF007.alt1",
+        "e": "uniF009.alt1",
+        "f": "uniF008.alt1",
+        "k": "uniF00C.alt1",
+        "s": "uniF00A.alt1",
+        "y": "uniF00B.alt1"
+      }
+    },
+    "pua_count": 33,
+    "pua_glyphs": [
+      {
+        "hex": "U+F000",
+        "char": "",
+        "name": "uniF000.alt1"
+      },
+      {
+        "hex": "U+F001",
+        "char": "",
+        "name": "uniF001.alt1"
+      },
+      {
+        "hex": "U+F002",
+        "char": "",
+        "name": "uniF002.alt1"
+      },
+      {
+        "hex": "U+F003",
+        "char": "",
+        "name": "uniF003.alt1"
+      },
+      {
+        "hex": "U+F004",
+        "char": "",
+        "name": "uniF004.alt1"
+      },
+      {
+        "hex": "U+F005",
+        "char": "",
+        "name": "uniF005.alt1"
+      },
+      {
+        "hex": "U+F006",
+        "char": "",
+        "name": "uniF006.alt1"
+      },
+      {
+        "hex": "U+F007",
+        "char": "",
+        "name": "uniF007.alt1"
+      },
+      {
+        "hex": "U+F008",
+        "char": "",
+        "name": "uniF008.alt1"
+      },
+      {
+        "hex": "U+F009",
+        "char": "",
+        "name": "uniF009.alt1"
+      },
+      {
+        "hex": "U+F00A",
+        "char": "",
+        "name": "uniF00A.alt1"
+      },
+      {
+        "hex": "U+F00B",
+        "char": "",
+        "name": "uniF00B.alt1"
+      },
+      {
+        "hex": "U+F00C",
+        "char": "",
+        "name": "uniF00C.alt1"
+      },
+      {
+        "hex": "U+F00D",
+        "char": "",
+        "name": "uniF00D.liga"
+      },
+      {
+        "hex": "U+F00E",
+        "char": "",
+        "name": "uniF00E.liga"
+      },
+      {
+        "hex": "U+F00F",
+        "char": "",
+        "name": "uniF00F.liga"
+      },
+      {
+        "hex": "U+F010",
+        "char": "",
+        "name": "uniF010.liga"
+      },
+      {
+        "hex": "U+F011",
+        "char": "",
+        "name": "uniF011.liga"
+      },
+      {
+        "hex": "U+F012",
+        "char": "",
+        "name": "uniF012.liga"
+      },
+      {
+        "hex": "U+F013",
+        "char": "",
+        "name": "uniF013.liga"
+      },
+      {
+        "hex": "U+F014",
+        "char": "",
+        "name": "uniF014.liga"
+      },
+      {
+        "hex": "U+F015",
+        "char": "",
+        "name": "uniF015.liga"
+      },
+      {
+        "hex": "U+F016",
+        "char": "",
+        "name": "uniF016.liga"
+      },
+      {
+        "hex": "U+F017",
+        "char": "",
+        "name": "uniF017.liga"
+      },
+      {
+        "hex": "U+F018",
+        "char": "",
+        "name": "uniF018.liga"
+      },
+      {
+        "hex": "U+F019",
+        "char": "",
+        "name": "uniF019.liga"
+      },
+      {
+        "hex": "U+F01A",
+        "char": "",
+        "name": "uniF01A.liga"
+      },
+      {
+        "hex": "U+F01B",
+        "char": "",
+        "name": "uniF01B.liga"
+      },
+      {
+        "hex": "U+F01C",
+        "char": "",
+        "name": "uniF01C.liga"
+      },
+      {
+        "hex": "U+F01D",
+        "char": "",
+        "name": "uniF01D.liga"
+      },
+      {
+        "hex": "U+F01E",
+        "char": "",
+        "name": "uniF01E.liga"
+      },
+      {
+        "hex": "U+F01F",
+        "char": "",
+        "name": "uniF01F.liga"
+      },
+      {
+        "hex": "U+F020",
+        "char": "",
+        "name": "uniF020.liga"
+      }
+    ]
+  },
+  "glamourchic": {
+    "name": "Glamour Chic",
+    "file": "Glamour Chic.ttf",
+    "features": [
+      "dlig",
+      "liga"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
+  "glamourglide": {
+    "name": "Glamour Glide",
+    "file": "Glamour Glide.ttf",
+    "features": [
+      "aalt",
+      "dlig",
+      "frac",
+      "liga",
+      "ordn",
+      "sups"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
+  "kaeleyaitalic": {
+    "name": "Kaeleya-Italic",
+    "file": "Kaeleya-Italic.ttf",
+    "features": [
+      "aalt",
+      "liga",
+      "salt"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 18,
+    "pua_glyphs": [
+      {
+        "hex": "U+E000",
+        "char": "",
+        "name": "uniE000"
+      },
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E00A",
+        "char": "",
+        "name": "uniE00A"
+      },
+      {
+        "hex": "U+E00B",
+        "char": "",
+        "name": "uniE00B"
+      },
+      {
+        "hex": "U+E4A0",
+        "char": "",
+        "name": "uniE4A0"
+      },
+      {
+        "hex": "U+E4A1",
+        "char": "",
+        "name": "uniE4A1"
+      },
+      {
+        "hex": "U+E4A3",
+        "char": "",
+        "name": "uniE4A3"
+      },
+      {
+        "hex": "U+E4AA",
+        "char": "",
+        "name": "uniE4AA"
+      },
+      {
+        "hex": "U+E4E0",
+        "char": "",
+        "name": "uniE4E0"
+      },
+      {
+        "hex": "U+E4E4",
+        "char": "",
+        "name": "uniE4E4"
+      }
+    ]
+  },
+  "kaeleyaregular": {
+    "name": "Kaeleya-Regular",
+    "file": "Kaeleya-Regular.ttf",
+    "features": [
+      "aalt",
+      "liga",
+      "salt"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 18,
+    "pua_glyphs": [
+      {
+        "hex": "U+E000",
+        "char": "",
+        "name": "uniE000"
+      },
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E00A",
+        "char": "",
+        "name": "uniE00A"
+      },
+      {
+        "hex": "U+E00B",
+        "char": "",
+        "name": "uniE00B"
+      },
+      {
+        "hex": "U+E4A0",
+        "char": "",
+        "name": "uniE4A0"
+      },
+      {
+        "hex": "U+E4A1",
+        "char": "",
+        "name": "uniE4A1"
+      },
+      {
+        "hex": "U+E4A3",
+        "char": "",
+        "name": "uniE4A3"
+      },
+      {
+        "hex": "U+E4AA",
+        "char": "",
+        "name": "uniE4AA"
+      },
+      {
+        "hex": "U+E4E0",
+        "char": "",
+        "name": "uniE4E0"
+      },
+      {
+        "hex": "U+E4E4",
+        "char": "",
+        "name": "uniE4E4"
+      }
+    ]
+  },
+  "luminara": {
+    "name": "Luminara",
+    "file": "Luminara.ttf",
+    "features": [
+      "aalt",
+      "frac",
+      "liga",
+      "ordn",
+      "salt",
+      "sups"
+    ],
+    "stylistic_sets": [],
+    "substitutions": {},
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
+  "megante": {
+    "name": "Megante",
+    "file": "Megante.ttf",
+    "features": [
+      "ss01"
+    ],
+    "stylistic_sets": [
+      "ss01"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "A.ss01",
+        "K": "K.ss01",
+        "M": "M.ss01",
+        "N": "N.ss01",
+        "Q": "Q.ss01",
+        "R": "R.ss01",
+        "V": "V.ss01",
+        "a": "a.ss01",
+        "e": "e.ss01",
+        "g": "g.ss01"
+      }
+    },
+    "pua_count": 0,
+    "pua_glyphs": []
+  },
+  "sagoraglamour": {
+    "name": "Sagora Glamour",
+    "file": "Sagora Glamour.ttf",
+    "features": [
+      "aalt",
+      "dlig",
+      "frac",
+      "liga",
+      "locl",
+      "ordn",
+      "salt",
+      "sinf",
+      "ss01",
+      "ss02",
+      "ss03",
+      "subs",
+      "sups"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02",
+      "ss03"
+    ],
+    "substitutions": {
+      "ss01": {
+        "O": "O.alt1",
+        "o": "o.alt1",
+        "s": "s.alt1"
+      },
+      "ss02": {
+        "O": "O.alt2",
+        "o": "o.alt2"
+      },
+      "ss03": {
+        "O": "O.alt3",
+        "o": "o.alt3"
+      }
+    },
+    "pua_count": 1,
+    "pua_glyphs": [
+      {
+        "hex": "U+F8FF",
+        "char": "",
+        "name": "uniF8FF"
+      }
+    ]
+  },
+  "thematic": {
+    "name": "Thematic",
+    "file": "Thematic.ttf",
+    "features": [
+      "aalt",
+      "dlig",
+      "frac",
+      "liga",
+      "ordn",
+      "salt",
+      "ss01",
+      "ss02",
+      "sups"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "uniE380",
+        "E": "uniE381",
+        "F": "uniE382",
+        "K": "uniE383",
+        "L": "uniE384",
+        "M": "uniE385",
+        "N": "uniE387",
+        "Q": "uniE389",
+        "R": "uniE38A",
+        "T": "uniE38B",
+        "U": "uniE38C",
+        "V": "uniE38D",
+        "W": "uniE38E",
+        "Z": "uniE38F",
+        "a": "uniE390",
+        "b": "uniE391",
+        "d": "uniE392",
+        "g": "uniE393",
+        "h": "uniE394",
+        "k": "uniE395",
+        "l": "uniE396",
+        "m": "uniE398",
+        "n": "uniE397"
+      },
+      "ss02": {
+        "A": "uniE388",
+        "M": "uniE386"
+      }
+    },
+    "pua_count": 53,
+    "pua_glyphs": [
+      {
+        "hex": "U+E380",
+        "char": "",
+        "name": "uniE380"
+      },
+      {
+        "hex": "U+E381",
+        "char": "",
+        "name": "uniE381"
+      },
+      {
+        "hex": "U+E382",
+        "char": "",
+        "name": "uniE382"
+      },
+      {
+        "hex": "U+E383",
+        "char": "",
+        "name": "uniE383"
+      },
+      {
+        "hex": "U+E384",
+        "char": "",
+        "name": "uniE384"
+      },
+      {
+        "hex": "U+E385",
+        "char": "",
+        "name": "uniE385"
+      },
+      {
+        "hex": "U+E386",
+        "char": "",
+        "name": "uniE386"
+      },
+      {
+        "hex": "U+E387",
+        "char": "",
+        "name": "uniE387"
+      },
+      {
+        "hex": "U+E388",
+        "char": "",
+        "name": "uniE388"
+      },
+      {
+        "hex": "U+E389",
+        "char": "",
+        "name": "uniE389"
+      },
+      {
+        "hex": "U+E38A",
+        "char": "",
+        "name": "uniE38A"
+      },
+      {
+        "hex": "U+E38B",
+        "char": "",
+        "name": "uniE38B"
+      },
+      {
+        "hex": "U+E38C",
+        "char": "",
+        "name": "uniE38C"
+      },
+      {
+        "hex": "U+E38D",
+        "char": "",
+        "name": "uniE38D"
+      },
+      {
+        "hex": "U+E38E",
+        "char": "",
+        "name": "uniE38E"
+      },
+      {
+        "hex": "U+E38F",
+        "char": "",
+        "name": "uniE38F"
+      },
+      {
+        "hex": "U+E390",
+        "char": "",
+        "name": "uniE390"
+      },
+      {
+        "hex": "U+E391",
+        "char": "",
+        "name": "uniE391"
+      },
+      {
+        "hex": "U+E392",
+        "char": "",
+        "name": "uniE392"
+      },
+      {
+        "hex": "U+E393",
+        "char": "",
+        "name": "uniE393"
+      },
+      {
+        "hex": "U+E394",
+        "char": "",
+        "name": "uniE394"
+      },
+      {
+        "hex": "U+E395",
+        "char": "",
+        "name": "uniE395"
+      },
+      {
+        "hex": "U+E396",
+        "char": "",
+        "name": "uniE396"
+      },
+      {
+        "hex": "U+E397",
+        "char": "",
+        "name": "uniE397"
+      },
+      {
+        "hex": "U+E398",
+        "char": "",
+        "name": "uniE398"
+      },
+      {
+        "hex": "U+E399",
+        "char": "",
+        "name": "uniE399"
+      },
+      {
+        "hex": "U+E39A",
+        "char": "",
+        "name": "uniE39A"
+      },
+      {
+        "hex": "U+E39B",
+        "char": "",
+        "name": "uniE39B"
+      },
+      {
+        "hex": "U+E39C",
+        "char": "",
+        "name": "uniE39C"
+      },
+      {
+        "hex": "U+E39D",
+        "char": "",
+        "name": "uniE39D"
+      },
+      {
+        "hex": "U+E39E",
+        "char": "",
+        "name": "uniE39E"
+      },
+      {
+        "hex": "U+E39F",
+        "char": "",
+        "name": "uniE39F"
+      },
+      {
+        "hex": "U+E3A0",
+        "char": "",
+        "name": "uniE3A0"
+      },
+      {
+        "hex": "U+E3A1",
+        "char": "",
+        "name": "uniE3A1"
+      },
+      {
+        "hex": "U+E3A2",
+        "char": "",
+        "name": "uniE3A2"
+      },
+      {
+        "hex": "U+E3A4",
+        "char": "",
+        "name": "uniE3A4"
+      },
+      {
+        "hex": "U+E3A5",
+        "char": "",
+        "name": "uniE3A5"
+      },
+      {
+        "hex": "U+E3A6",
+        "char": "",
+        "name": "uniE3A6"
+      },
+      {
+        "hex": "U+E3A7",
+        "char": "",
+        "name": "uniE3A7"
+      },
+      {
+        "hex": "U+E3A9",
+        "char": "",
+        "name": "uniE3A9"
+      },
+      {
+        "hex": "U+E3AA",
+        "char": "",
+        "name": "uniE3AA"
+      },
+      {
+        "hex": "U+E3AB",
+        "char": "",
+        "name": "uniE3AB"
+      },
+      {
+        "hex": "U+E3AC",
+        "char": "",
+        "name": "uniE3AC"
+      },
+      {
+        "hex": "U+E3AD",
+        "char": "",
+        "name": "uniE3AD"
+      },
+      {
+        "hex": "U+E3AE",
+        "char": "",
+        "name": "uniE3AE"
+      },
+      {
+        "hex": "U+E3AF",
+        "char": "",
+        "name": "uniE3AF"
+      },
+      {
+        "hex": "U+E3B0",
+        "char": "",
+        "name": "uniE3B0"
+      },
+      {
+        "hex": "U+E3B1",
+        "char": "",
+        "name": "uniE3B1"
+      },
+      {
+        "hex": "U+E3B2",
+        "char": "",
+        "name": "uniE3B2"
+      },
+      {
+        "hex": "U+E3B3",
+        "char": "",
+        "name": "uniE3B3"
+      },
+      {
+        "hex": "U+E3B4",
+        "char": "",
+        "name": "uniE3B4"
+      },
+      {
+        "hex": "U+E3B5",
+        "char": "",
+        "name": "uniE3B5"
+      },
+      {
+        "hex": "U+E3B6",
+        "char": "",
+        "name": "uniE3B6"
+      }
+    ]
+  },
+  "glamourcoquetteitalic": {
+    "name": "Glamour Coquette-Italic",
+    "file": "Glamour Coquette-Italic.ttf",
+    "features": [
+      "aalt",
+      "dlig",
+      "frac",
+      "liga",
+      "ordn",
+      "salt",
+      "ss01",
+      "ss02",
+      "sups"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "uniE001",
+        "B": "uniE003",
+        "C": "uniE004",
+        "D": "uniE005",
+        "E": "uniE006",
+        "F": "uniE007",
+        "G": "uniE008",
+        "H": "uniE009",
+        "I": "uniE010",
+        "J": "uniE011",
+        "K": "uniE012",
+        "L": "uniE014",
+        "M": "uniE015",
+        "N": "uniE016",
+        "P": "uniE017",
+        "Q": "uniE018",
+        "R": "uniE019",
+        "S": "uniE020",
+        "T": "uniE021",
+        "U": "uniE022",
+        "V": "uniE023",
+        "W": "uniE024",
+        "X": "uniE025",
+        "Y": "uniE027",
+        "Z": "uniE028",
+        "a": "uniE029",
+        "b": "uniE031",
+        "c": "uniE033",
+        "d": "uniE034",
+        "e": "uniE036",
+        "f": "uniE037",
+        "g": "uniE038",
+        "h": "uniE039",
+        "i": "uniE041",
+        "k": "uniE043",
+        "l": "uniE045",
+        "m": "uniE046",
+        "n": "uniE047",
+        "o": "uniE048",
+        "p": "uniE049",
+        "q": "uniE050",
+        "r": "uniE051",
+        "t": "uniE052",
+        "u": "uniE053",
+        "v": "uniE054",
+        "w": "uniE055",
+        "y": "uniE056",
+        "z": "uniE057"
+      },
+      "ss02": {
+        "A": "uniE002",
+        "K": "uniE013",
+        "a": "uniE030",
+        "b": "uniE032",
+        "d": "uniE035",
+        "h": "uniE040",
+        "i": "uniE042",
+        "k": "uniE044"
+      }
+    },
+    "pua_count": 80,
+    "pua_glyphs": [
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E010",
+        "char": "",
+        "name": "uniE010"
+      },
+      {
+        "hex": "U+E011",
+        "char": "",
+        "name": "uniE011"
+      },
+      {
+        "hex": "U+E012",
+        "char": "",
+        "name": "uniE012"
+      },
+      {
+        "hex": "U+E013",
+        "char": "",
+        "name": "uniE013"
+      },
+      {
+        "hex": "U+E014",
+        "char": "",
+        "name": "uniE014"
+      },
+      {
+        "hex": "U+E015",
+        "char": "",
+        "name": "uniE015"
+      },
+      {
+        "hex": "U+E016",
+        "char": "",
+        "name": "uniE016"
+      },
+      {
+        "hex": "U+E017",
+        "char": "",
+        "name": "uniE017"
+      },
+      {
+        "hex": "U+E018",
+        "char": "",
+        "name": "uniE018"
+      },
+      {
+        "hex": "U+E019",
+        "char": "",
+        "name": "uniE019"
+      },
+      {
+        "hex": "U+E020",
+        "char": "",
+        "name": "uniE020"
+      },
+      {
+        "hex": "U+E021",
+        "char": "",
+        "name": "uniE021"
+      },
+      {
+        "hex": "U+E022",
+        "char": "",
+        "name": "uniE022"
+      },
+      {
+        "hex": "U+E023",
+        "char": "",
+        "name": "uniE023"
+      },
+      {
+        "hex": "U+E024",
+        "char": "",
+        "name": "uniE024"
+      },
+      {
+        "hex": "U+E025",
+        "char": "",
+        "name": "uniE025"
+      },
+      {
+        "hex": "U+E027",
+        "char": "",
+        "name": "uniE027"
+      },
+      {
+        "hex": "U+E028",
+        "char": "",
+        "name": "uniE028"
+      },
+      {
+        "hex": "U+E029",
+        "char": "",
+        "name": "uniE029"
+      },
+      {
+        "hex": "U+E030",
+        "char": "",
+        "name": "uniE030"
+      },
+      {
+        "hex": "U+E031",
+        "char": "",
+        "name": "uniE031"
+      },
+      {
+        "hex": "U+E032",
+        "char": "",
+        "name": "uniE032"
+      },
+      {
+        "hex": "U+E033",
+        "char": "",
+        "name": "uniE033"
+      },
+      {
+        "hex": "U+E034",
+        "char": "",
+        "name": "uniE034"
+      },
+      {
+        "hex": "U+E035",
+        "char": "",
+        "name": "uniE035"
+      },
+      {
+        "hex": "U+E036",
+        "char": "",
+        "name": "uniE036"
+      },
+      {
+        "hex": "U+E037",
+        "char": "",
+        "name": "uniE037"
+      },
+      {
+        "hex": "U+E038",
+        "char": "",
+        "name": "uniE038"
+      },
+      {
+        "hex": "U+E039",
+        "char": "",
+        "name": "uniE039"
+      },
+      {
+        "hex": "U+E040",
+        "char": "",
+        "name": "uniE040"
+      },
+      {
+        "hex": "U+E041",
+        "char": "",
+        "name": "uniE041"
+      },
+      {
+        "hex": "U+E042",
+        "char": "",
+        "name": "uniE042"
+      },
+      {
+        "hex": "U+E043",
+        "char": "",
+        "name": "uniE043"
+      },
+      {
+        "hex": "U+E044",
+        "char": "",
+        "name": "uniE044"
+      },
+      {
+        "hex": "U+E045",
+        "char": "",
+        "name": "uniE045"
+      },
+      {
+        "hex": "U+E046",
+        "char": "",
+        "name": "uniE046"
+      },
+      {
+        "hex": "U+E047",
+        "char": "",
+        "name": "uniE047"
+      },
+      {
+        "hex": "U+E048",
+        "char": "",
+        "name": "uniE048"
+      },
+      {
+        "hex": "U+E049",
+        "char": "",
+        "name": "uniE049"
+      },
+      {
+        "hex": "U+E050",
+        "char": "",
+        "name": "uniE050"
+      },
+      {
+        "hex": "U+E051",
+        "char": "",
+        "name": "uniE051"
+      },
+      {
+        "hex": "U+E052",
+        "char": "",
+        "name": "uniE052"
+      },
+      {
+        "hex": "U+E053",
+        "char": "",
+        "name": "uniE053"
+      },
+      {
+        "hex": "U+E054",
+        "char": "",
+        "name": "uniE054"
+      },
+      {
+        "hex": "U+E055",
+        "char": "",
+        "name": "uniE055"
+      },
+      {
+        "hex": "U+E056",
+        "char": "",
+        "name": "uniE056"
+      },
+      {
+        "hex": "U+E057",
+        "char": "",
+        "name": "uniE057"
+      },
+      {
+        "hex": "U+E058",
+        "char": "",
+        "name": "uniE058"
+      },
+      {
+        "hex": "U+E059",
+        "char": "",
+        "name": "uniE059"
+      },
+      {
+        "hex": "U+E060",
+        "char": "",
+        "name": "uniE060"
+      },
+      {
+        "hex": "U+E061",
+        "char": "",
+        "name": "uniE061"
+      },
+      {
+        "hex": "U+E062",
+        "char": "",
+        "name": "uniE062"
+      },
+      {
+        "hex": "U+E063",
+        "char": "",
+        "name": "uniE063"
+      },
+      {
+        "hex": "U+E064",
+        "char": "",
+        "name": "uniE064"
+      },
+      {
+        "hex": "U+E065",
+        "char": "",
+        "name": "uniE065"
+      },
+      {
+        "hex": "U+E066",
+        "char": "",
+        "name": "uniE066"
+      },
+      {
+        "hex": "U+E067",
+        "char": "",
+        "name": "uniE067"
+      },
+      {
+        "hex": "U+E068",
+        "char": "",
+        "name": "uniE068"
+      },
+      {
+        "hex": "U+E069",
+        "char": "",
+        "name": "uniE069"
+      },
+      {
+        "hex": "U+E070",
+        "char": "",
+        "name": "uniE070"
+      },
+      {
+        "hex": "U+E071",
+        "char": "",
+        "name": "uniE071"
+      },
+      {
+        "hex": "U+E072",
+        "char": "",
+        "name": "uniE072"
+      },
+      {
+        "hex": "U+E073",
+        "char": "",
+        "name": "uniE073"
+      },
+      {
+        "hex": "U+E074",
+        "char": "",
+        "name": "uniE074"
+      },
+      {
+        "hex": "U+E075",
+        "char": "",
+        "name": "uniE075"
+      },
+      {
+        "hex": "U+E076",
+        "char": "",
+        "name": "uniE076"
+      },
+      {
+        "hex": "U+E077",
+        "char": "",
+        "name": "uniE077"
+      },
+      {
+        "hex": "U+E078",
+        "char": "",
+        "name": "uniE078"
+      },
+      {
+        "hex": "U+E079",
+        "char": "",
+        "name": "uniE079"
+      },
+      {
+        "hex": "U+E080",
+        "char": "",
+        "name": "uniE080"
+      },
+      {
+        "hex": "U+E081",
+        "char": "",
+        "name": "uniE081"
+      }
+    ]
+  },
+  "glamourcoquetteregular": {
+    "name": "Glamour Coquette-Regular",
+    "file": "Glamour Coquette-Regular.ttf",
+    "features": [
+      "aalt",
+      "dlig",
+      "frac",
+      "liga",
+      "ordn",
+      "salt",
+      "ss01",
+      "ss02",
+      "sups"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "uniE001",
+        "B": "uniE003",
+        "C": "uniE004",
+        "D": "uniE005",
+        "E": "uniE006",
+        "F": "uniE007",
+        "G": "uniE008",
+        "H": "uniE009",
+        "I": "uniE010",
+        "J": "uniE011",
+        "K": "uniE012",
+        "L": "uniE014",
+        "M": "uniE015",
+        "N": "uniE016",
+        "P": "uniE017",
+        "Q": "uniE018",
+        "R": "uniE019",
+        "S": "uniE020",
+        "T": "uniE021",
+        "U": "uniE022",
+        "V": "uniE023",
+        "W": "uniE024",
+        "X": "uniE025",
+        "Y": "uniE027",
+        "Z": "uniE028",
+        "a": "uniE029",
+        "b": "uniE031",
+        "c": "uniE033",
+        "d": "uniE034",
+        "e": "uniE036",
+        "f": "uniE037",
+        "g": "uniE038",
+        "h": "uniE039",
+        "i": "uniE041",
+        "k": "uniE043",
+        "l": "uniE045",
+        "m": "uniE046",
+        "n": "uniE047",
+        "o": "uniE048",
+        "p": "uniE049",
+        "q": "uniE050",
+        "r": "uniE051",
+        "t": "uniE052",
+        "u": "uniE053",
+        "v": "uniE054",
+        "w": "uniE055",
+        "y": "uniE056",
+        "z": "uniE057"
+      },
+      "ss02": {
+        "A": "uniE002",
+        "K": "uniE013",
+        "a": "uniE030",
+        "b": "uniE032",
+        "d": "uniE035",
+        "h": "uniE040",
+        "i": "uniE042",
+        "k": "uniE044"
+      }
+    },
+    "pua_count": 80,
+    "pua_glyphs": [
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E010",
+        "char": "",
+        "name": "uniE010"
+      },
+      {
+        "hex": "U+E011",
+        "char": "",
+        "name": "uniE011"
+      },
+      {
+        "hex": "U+E012",
+        "char": "",
+        "name": "uniE012"
+      },
+      {
+        "hex": "U+E013",
+        "char": "",
+        "name": "uniE013"
+      },
+      {
+        "hex": "U+E014",
+        "char": "",
+        "name": "uniE014"
+      },
+      {
+        "hex": "U+E015",
+        "char": "",
+        "name": "uniE015"
+      },
+      {
+        "hex": "U+E016",
+        "char": "",
+        "name": "uniE016"
+      },
+      {
+        "hex": "U+E017",
+        "char": "",
+        "name": "uniE017"
+      },
+      {
+        "hex": "U+E018",
+        "char": "",
+        "name": "uniE018"
+      },
+      {
+        "hex": "U+E019",
+        "char": "",
+        "name": "uniE019"
+      },
+      {
+        "hex": "U+E020",
+        "char": "",
+        "name": "uniE020"
+      },
+      {
+        "hex": "U+E021",
+        "char": "",
+        "name": "uniE021"
+      },
+      {
+        "hex": "U+E022",
+        "char": "",
+        "name": "uniE022"
+      },
+      {
+        "hex": "U+E023",
+        "char": "",
+        "name": "uniE023"
+      },
+      {
+        "hex": "U+E024",
+        "char": "",
+        "name": "uniE024"
+      },
+      {
+        "hex": "U+E025",
+        "char": "",
+        "name": "uniE025"
+      },
+      {
+        "hex": "U+E027",
+        "char": "",
+        "name": "uniE027"
+      },
+      {
+        "hex": "U+E028",
+        "char": "",
+        "name": "uniE028"
+      },
+      {
+        "hex": "U+E029",
+        "char": "",
+        "name": "uniE029"
+      },
+      {
+        "hex": "U+E030",
+        "char": "",
+        "name": "uniE030"
+      },
+      {
+        "hex": "U+E031",
+        "char": "",
+        "name": "uniE031"
+      },
+      {
+        "hex": "U+E032",
+        "char": "",
+        "name": "uniE032"
+      },
+      {
+        "hex": "U+E033",
+        "char": "",
+        "name": "uniE033"
+      },
+      {
+        "hex": "U+E034",
+        "char": "",
+        "name": "uniE034"
+      },
+      {
+        "hex": "U+E035",
+        "char": "",
+        "name": "uniE035"
+      },
+      {
+        "hex": "U+E036",
+        "char": "",
+        "name": "uniE036"
+      },
+      {
+        "hex": "U+E037",
+        "char": "",
+        "name": "uniE037"
+      },
+      {
+        "hex": "U+E038",
+        "char": "",
+        "name": "uniE038"
+      },
+      {
+        "hex": "U+E039",
+        "char": "",
+        "name": "uniE039"
+      },
+      {
+        "hex": "U+E040",
+        "char": "",
+        "name": "uniE040"
+      },
+      {
+        "hex": "U+E041",
+        "char": "",
+        "name": "uniE041"
+      },
+      {
+        "hex": "U+E042",
+        "char": "",
+        "name": "uniE042"
+      },
+      {
+        "hex": "U+E043",
+        "char": "",
+        "name": "uniE043"
+      },
+      {
+        "hex": "U+E044",
+        "char": "",
+        "name": "uniE044"
+      },
+      {
+        "hex": "U+E045",
+        "char": "",
+        "name": "uniE045"
+      },
+      {
+        "hex": "U+E046",
+        "char": "",
+        "name": "uniE046"
+      },
+      {
+        "hex": "U+E047",
+        "char": "",
+        "name": "uniE047"
+      },
+      {
+        "hex": "U+E048",
+        "char": "",
+        "name": "uniE048"
+      },
+      {
+        "hex": "U+E049",
+        "char": "",
+        "name": "uniE049"
+      },
+      {
+        "hex": "U+E050",
+        "char": "",
+        "name": "uniE050"
+      },
+      {
+        "hex": "U+E051",
+        "char": "",
+        "name": "uniE051"
+      },
+      {
+        "hex": "U+E052",
+        "char": "",
+        "name": "uniE052"
+      },
+      {
+        "hex": "U+E053",
+        "char": "",
+        "name": "uniE053"
+      },
+      {
+        "hex": "U+E054",
+        "char": "",
+        "name": "uniE054"
+      },
+      {
+        "hex": "U+E055",
+        "char": "",
+        "name": "uniE055"
+      },
+      {
+        "hex": "U+E056",
+        "char": "",
+        "name": "uniE056"
+      },
+      {
+        "hex": "U+E057",
+        "char": "",
+        "name": "uniE057"
+      },
+      {
+        "hex": "U+E058",
+        "char": "",
+        "name": "uniE058"
+      },
+      {
+        "hex": "U+E059",
+        "char": "",
+        "name": "uniE059"
+      },
+      {
+        "hex": "U+E060",
+        "char": "",
+        "name": "uniE060"
+      },
+      {
+        "hex": "U+E061",
+        "char": "",
+        "name": "uniE061"
+      },
+      {
+        "hex": "U+E062",
+        "char": "",
+        "name": "uniE062"
+      },
+      {
+        "hex": "U+E063",
+        "char": "",
+        "name": "uniE063"
+      },
+      {
+        "hex": "U+E064",
+        "char": "",
+        "name": "uniE064"
+      },
+      {
+        "hex": "U+E065",
+        "char": "",
+        "name": "uniE065"
+      },
+      {
+        "hex": "U+E066",
+        "char": "",
+        "name": "uniE066"
+      },
+      {
+        "hex": "U+E067",
+        "char": "",
+        "name": "uniE067"
+      },
+      {
+        "hex": "U+E068",
+        "char": "",
+        "name": "uniE068"
+      },
+      {
+        "hex": "U+E069",
+        "char": "",
+        "name": "uniE069"
+      },
+      {
+        "hex": "U+E070",
+        "char": "",
+        "name": "uniE070"
+      },
+      {
+        "hex": "U+E071",
+        "char": "",
+        "name": "uniE071"
+      },
+      {
+        "hex": "U+E072",
+        "char": "",
+        "name": "uniE072"
+      },
+      {
+        "hex": "U+E073",
+        "char": "",
+        "name": "uniE073"
+      },
+      {
+        "hex": "U+E074",
+        "char": "",
+        "name": "uniE074"
+      },
+      {
+        "hex": "U+E075",
+        "char": "",
+        "name": "uniE075"
+      },
+      {
+        "hex": "U+E076",
+        "char": "",
+        "name": "uniE076"
+      },
+      {
+        "hex": "U+E077",
+        "char": "",
+        "name": "uniE077"
+      },
+      {
+        "hex": "U+E078",
+        "char": "",
+        "name": "uniE078"
+      },
+      {
+        "hex": "U+E079",
+        "char": "",
+        "name": "uniE079"
+      },
+      {
+        "hex": "U+E080",
+        "char": "",
+        "name": "uniE080"
+      },
+      {
+        "hex": "U+E081",
+        "char": "",
+        "name": "uniE081"
+      }
+    ]
+  },
+  "kaliebluxuryitalic": {
+    "name": "KaliebLuxury-Italic",
+    "file": "KaliebLuxury-Italic.ttf",
+    "features": [
+      "aalt",
+      "ccmp",
+      "liga",
+      "locl",
+      "ss01",
+      "ss02",
+      "ss03"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02",
+      "ss03"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "uniE001",
+        "B": "uniE002",
+        "C": "uniE003",
+        "D": "uniE004",
+        "E": "uniE005",
+        "F": "uniE006",
+        "G": "uniE007",
+        "H": "uniE008",
+        "I": "uniE009",
+        "K": "uniE00A",
+        "M": "uniE00B",
+        "O": "uniE00C",
+        "P": "uniE00D",
+        "R": "uniE00E",
+        "S": "uniE00F",
+        "T": "uniE010",
+        "V": "uniE011",
+        "W": "uniE012",
+        "X": "uniE013",
+        "Y": "uniE014"
+      },
+      "ss02": {
+        "A": "uniE015",
+        "B": "uniE016",
+        "P": "uniE017",
+        "R": "uniE018",
+        "Y": "uniE019"
+      },
+      "ss03": {
+        "A": "uniE01A",
+        "P": "uniE01B",
+        "R": "uniE01C"
+      }
+    },
+    "pua_count": 50,
+    "pua_glyphs": [
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E00A",
+        "char": "",
+        "name": "uniE00A"
+      },
+      {
+        "hex": "U+E00B",
+        "char": "",
+        "name": "uniE00B"
+      },
+      {
+        "hex": "U+E00C",
+        "char": "",
+        "name": "uniE00C"
+      },
+      {
+        "hex": "U+E00D",
+        "char": "",
+        "name": "uniE00D"
+      },
+      {
+        "hex": "U+E00E",
+        "char": "",
+        "name": "uniE00E"
+      },
+      {
+        "hex": "U+E00F",
+        "char": "",
+        "name": "uniE00F"
+      },
+      {
+        "hex": "U+E010",
+        "char": "",
+        "name": "uniE010"
+      },
+      {
+        "hex": "U+E011",
+        "char": "",
+        "name": "uniE011"
+      },
+      {
+        "hex": "U+E012",
+        "char": "",
+        "name": "uniE012"
+      },
+      {
+        "hex": "U+E013",
+        "char": "",
+        "name": "uniE013"
+      },
+      {
+        "hex": "U+E014",
+        "char": "",
+        "name": "uniE014"
+      },
+      {
+        "hex": "U+E015",
+        "char": "",
+        "name": "uniE015"
+      },
+      {
+        "hex": "U+E016",
+        "char": "",
+        "name": "uniE016"
+      },
+      {
+        "hex": "U+E017",
+        "char": "",
+        "name": "uniE017"
+      },
+      {
+        "hex": "U+E018",
+        "char": "",
+        "name": "uniE018"
+      },
+      {
+        "hex": "U+E019",
+        "char": "",
+        "name": "uniE019"
+      },
+      {
+        "hex": "U+E01A",
+        "char": "",
+        "name": "uniE01A"
+      },
+      {
+        "hex": "U+E01B",
+        "char": "",
+        "name": "uniE01B"
+      },
+      {
+        "hex": "U+E01C",
+        "char": "",
+        "name": "uniE01C"
+      },
+      {
+        "hex": "U+E01D",
+        "char": "",
+        "name": "uniE01D"
+      },
+      {
+        "hex": "U+E01E",
+        "char": "",
+        "name": "uniE01E"
+      },
+      {
+        "hex": "U+E01F",
+        "char": "",
+        "name": "uniE01F"
+      },
+      {
+        "hex": "U+E020",
+        "char": "",
+        "name": "uniE020"
+      },
+      {
+        "hex": "U+E021",
+        "char": "",
+        "name": "uniE021"
+      },
+      {
+        "hex": "U+E022",
+        "char": "",
+        "name": "uniE022"
+      },
+      {
+        "hex": "U+E023",
+        "char": "",
+        "name": "uniE023"
+      },
+      {
+        "hex": "U+E024",
+        "char": "",
+        "name": "uniE024"
+      },
+      {
+        "hex": "U+E025",
+        "char": "",
+        "name": "uniE025"
+      },
+      {
+        "hex": "U+E026",
+        "char": "",
+        "name": "uniE026"
+      },
+      {
+        "hex": "U+E027",
+        "char": "",
+        "name": "uniE027"
+      },
+      {
+        "hex": "U+E028",
+        "char": "",
+        "name": "uniE028"
+      },
+      {
+        "hex": "U+E029",
+        "char": "",
+        "name": "uniE029"
+      },
+      {
+        "hex": "U+E02A",
+        "char": "",
+        "name": "uniE02A"
+      },
+      {
+        "hex": "U+E02B",
+        "char": "",
+        "name": "uniE02B"
+      },
+      {
+        "hex": "U+E02C",
+        "char": "",
+        "name": "uniE02C"
+      },
+      {
+        "hex": "U+E02D",
+        "char": "",
+        "name": "uniE02D"
+      },
+      {
+        "hex": "U+E02E",
+        "char": "",
+        "name": "uniE02E"
+      },
+      {
+        "hex": "U+E02F",
+        "char": "",
+        "name": "uniE02F"
+      },
+      {
+        "hex": "U+E030",
+        "char": "",
+        "name": "uniE030"
+      },
+      {
+        "hex": "U+E031",
+        "char": "",
+        "name": "uniE031"
+      },
+      {
+        "hex": "U+E032",
+        "char": "",
+        "name": "uniE032"
+      }
+    ]
+  },
+  "kaliebluxuryregular": {
+    "name": "KaliebLuxury-Regular",
+    "file": "KaliebLuxury-Regular.ttf",
+    "features": [
+      "aalt",
+      "ccmp",
+      "liga",
+      "locl",
+      "ss01",
+      "ss02",
+      "ss03"
+    ],
+    "stylistic_sets": [
+      "ss01",
+      "ss02",
+      "ss03"
+    ],
+    "substitutions": {
+      "ss01": {
+        "A": "uniE001",
+        "B": "uniE002",
+        "C": "uniE003",
+        "D": "uniE004",
+        "E": "uniE005",
+        "F": "uniE006",
+        "G": "uniE007",
+        "H": "uniE008",
+        "I": "uniE009",
+        "K": "uniE00A",
+        "M": "uniE00B",
+        "O": "uniE00C",
+        "P": "uniE00D",
+        "R": "uniE00E",
+        "S": "uniE00F",
+        "T": "uniE010",
+        "V": "uniE011",
+        "W": "uniE012",
+        "X": "uniE013",
+        "Y": "uniE014"
+      },
+      "ss02": {
+        "A": "uniE015",
+        "B": "uniE016",
+        "P": "uniE017",
+        "R": "uniE018",
+        "Y": "uniE019"
+      },
+      "ss03": {
+        "A": "uniE01A",
+        "P": "uniE01B",
+        "R": "uniE01C"
+      }
+    },
+    "pua_count": 50,
+    "pua_glyphs": [
+      {
+        "hex": "U+E001",
+        "char": "",
+        "name": "uniE001"
+      },
+      {
+        "hex": "U+E002",
+        "char": "",
+        "name": "uniE002"
+      },
+      {
+        "hex": "U+E003",
+        "char": "",
+        "name": "uniE003"
+      },
+      {
+        "hex": "U+E004",
+        "char": "",
+        "name": "uniE004"
+      },
+      {
+        "hex": "U+E005",
+        "char": "",
+        "name": "uniE005"
+      },
+      {
+        "hex": "U+E006",
+        "char": "",
+        "name": "uniE006"
+      },
+      {
+        "hex": "U+E007",
+        "char": "",
+        "name": "uniE007"
+      },
+      {
+        "hex": "U+E008",
+        "char": "",
+        "name": "uniE008"
+      },
+      {
+        "hex": "U+E009",
+        "char": "",
+        "name": "uniE009"
+      },
+      {
+        "hex": "U+E00A",
+        "char": "",
+        "name": "uniE00A"
+      },
+      {
+        "hex": "U+E00B",
+        "char": "",
+        "name": "uniE00B"
+      },
+      {
+        "hex": "U+E00C",
+        "char": "",
+        "name": "uniE00C"
+      },
+      {
+        "hex": "U+E00D",
+        "char": "",
+        "name": "uniE00D"
+      },
+      {
+        "hex": "U+E00E",
+        "char": "",
+        "name": "uniE00E"
+      },
+      {
+        "hex": "U+E00F",
+        "char": "",
+        "name": "uniE00F"
+      },
+      {
+        "hex": "U+E010",
+        "char": "",
+        "name": "uniE010"
+      },
+      {
+        "hex": "U+E011",
+        "char": "",
+        "name": "uniE011"
+      },
+      {
+        "hex": "U+E012",
+        "char": "",
+        "name": "uniE012"
+      },
+      {
+        "hex": "U+E013",
+        "char": "",
+        "name": "uniE013"
+      },
+      {
+        "hex": "U+E014",
+        "char": "",
+        "name": "uniE014"
+      },
+      {
+        "hex": "U+E015",
+        "char": "",
+        "name": "uniE015"
+      },
+      {
+        "hex": "U+E016",
+        "char": "",
+        "name": "uniE016"
+      },
+      {
+        "hex": "U+E017",
+        "char": "",
+        "name": "uniE017"
+      },
+      {
+        "hex": "U+E018",
+        "char": "",
+        "name": "uniE018"
+      },
+      {
+        "hex": "U+E019",
+        "char": "",
+        "name": "uniE019"
+      },
+      {
+        "hex": "U+E01A",
+        "char": "",
+        "name": "uniE01A"
+      },
+      {
+        "hex": "U+E01B",
+        "char": "",
+        "name": "uniE01B"
+      },
+      {
+        "hex": "U+E01C",
+        "char": "",
+        "name": "uniE01C"
+      },
+      {
+        "hex": "U+E01D",
+        "char": "",
+        "name": "uniE01D"
+      },
+      {
+        "hex": "U+E01E",
+        "char": "",
+        "name": "uniE01E"
+      },
+      {
+        "hex": "U+E01F",
+        "char": "",
+        "name": "uniE01F"
+      },
+      {
+        "hex": "U+E020",
+        "char": "",
+        "name": "uniE020"
+      },
+      {
+        "hex": "U+E021",
+        "char": "",
+        "name": "uniE021"
+      },
+      {
+        "hex": "U+E022",
+        "char": "",
+        "name": "uniE022"
+      },
+      {
+        "hex": "U+E023",
+        "char": "",
+        "name": "uniE023"
+      },
+      {
+        "hex": "U+E024",
+        "char": "",
+        "name": "uniE024"
+      },
+      {
+        "hex": "U+E025",
+        "char": "",
+        "name": "uniE025"
+      },
+      {
+        "hex": "U+E026",
+        "char": "",
+        "name": "uniE026"
+      },
+      {
+        "hex": "U+E027",
+        "char": "",
+        "name": "uniE027"
+      },
+      {
+        "hex": "U+E028",
+        "char": "",
+        "name": "uniE028"
+      },
+      {
+        "hex": "U+E029",
+        "char": "",
+        "name": "uniE029"
+      },
+      {
+        "hex": "U+E02A",
+        "char": "",
+        "name": "uniE02A"
+      },
+      {
+        "hex": "U+E02B",
+        "char": "",
+        "name": "uniE02B"
+      },
+      {
+        "hex": "U+E02C",
+        "char": "",
+        "name": "uniE02C"
+      },
+      {
+        "hex": "U+E02D",
+        "char": "",
+        "name": "uniE02D"
+      },
+      {
+        "hex": "U+E02E",
+        "char": "",
+        "name": "uniE02E"
+      },
+      {
+        "hex": "U+E02F",
+        "char": "",
+        "name": "uniE02F"
+      },
+      {
+        "hex": "U+E030",
+        "char": "",
+        "name": "uniE030"
+      },
+      {
+        "hex": "U+E031",
+        "char": "",
+        "name": "uniE031"
+      },
+      {
+        "hex": "U+E032",
+        "char": "",
+        "name": "uniE032"
+      }
+    ]
+  }
+}

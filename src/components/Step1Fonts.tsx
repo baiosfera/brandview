@@ -26,6 +26,7 @@ import {
   showEcosystemsSection,
   setShowEcosystemsSection,
   extractAndReloadEnvatoFonts,
+  computeFontFeatureSettings,
   type FontEcosystem,
   type ElementStyle,
   type CanvasCardState

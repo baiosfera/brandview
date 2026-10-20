@@ -740,6 +740,31 @@ app.get('/api/fonts/envato/:fontName', (c) => {
   });
 });
 
+// 6b. Metadatos de OpenType, Sets Estilísticos y Glifos PUA por Fuente
+app.get('/api/fonts/features/:fontName', (c) => {
+  const rawTarget = decodeURIComponent(c.req.param('fontName'));
+  const normTarget = rawTarget.toLowerCase().replace(/[\s\-_]/g, '').replace(/\.(otf|ttf|woff|woff2)$/i, '');
+
+  try {
+    const featuresPath = join(__dirname, 'fonts_features.json');
+    if (existsSync(featuresPath)) {
+      const data = JSON.parse(readFileSync(featuresPath, 'utf-8'));
+      if (data[normTarget]) {
+        return c.json(data[normTarget]);
+      }
+      for (const [k, v] of Object.entries(data)) {
+        if (k.includes(normTarget) || normTarget.includes(k)) {
+          return c.json(v);
+        }
+      }
+    }
+  } catch (err) {
+    console.error('[FontFeatures Error]:', err);
+  }
+
+  return c.json({ name: rawTarget, features: [], stylistic_sets: [], substitutions: {}, pua_count: 0, pua_glyphs: [] });
+});
+
 // 7. Exportación Rasterizada Retina en Servidor (@resvg/resvg-js + sharp)
 app.post('/api/export/render-svg', async (c) => {
   try {

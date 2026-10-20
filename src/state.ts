@@ -44,10 +44,45 @@ export interface ElementStyle {
   fontStyle: 'normal' | 'italic';
   textAlign: 'left' | 'center' | 'right' | 'justify';
   ligatures: boolean;
+  stylisticSet?: 'auto' | 'none' | 'ss01' | 'ss02' | 'ss03' | 'ss04' | 'ss05' | 'all';
+  swashes?: boolean;
+  alternates?: boolean;
   translateX: number;
   translateY: number;
   rotation: number;
   mirror: boolean;
+}
+
+export function computeFontFeatureSettings(style: Partial<ElementStyle>): string {
+  const isLig = style.ligatures !== false;
+  const features: string[] = [];
+
+  if (isLig) {
+    features.push('"liga" 1', '"dlig" 1', '"clig" 1', '"calt" 1', '"hlig" 1');
+  } else {
+    features.push('"liga" 0', '"dlig" 0');
+  }
+
+  if (style.swashes !== false && (style.swashes || isLig)) {
+    features.push('"swsh" 1', '"cswh" 1');
+  }
+
+  if (style.alternates !== false && (style.alternates || isLig)) {
+    features.push('"salt" 1', '"titl" 1');
+  }
+
+  const ss = style.stylisticSet;
+  if (ss === 'none') {
+    // Apagado explícito
+  } else if (ss && ss !== 'auto' && ss !== 'all') {
+    features.push(`"${ss}" 1`);
+  } else {
+    if (isLig) {
+      features.push('"ss01" 1', '"ss02" 1', '"ss03" 1');
+    }
+  }
+
+  return features.join(', ');
 }
 
 export interface CanvasCardState {
@@ -166,6 +201,9 @@ export function getActiveElementStyle(): ElementStyle {
       fontStyle: 'normal',
       textAlign: 'center',
       ligatures: true,
+      stylisticSet: 'auto',
+      swashes: true,
+      alternates: true,
       translateX: 0,
       translateY: 0,
       rotation: 0,
